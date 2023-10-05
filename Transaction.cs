@@ -38,7 +38,6 @@ namespace WebShop3
                                                     "\n\nTime of purchase: " +
                                                     TimeOfPurchase +
                                                     ".";
-
             return transactionData;
         }
     }
