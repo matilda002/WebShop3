@@ -6,20 +6,31 @@ using System.Threading.Tasks;
 
 namespace WebShop3
 {
-    public class Transaction
+    public record Transaction(List<string> boughtProducts, int amountOfSpentMoney, DateTime timeOfPurchase)
     {
-        public readonly List<string> BoughtProducts;
-        public readonly int AmountOfSpentMoney = 0;
 
-        public readonly DateTime TimeOfPurchase;
-
-        public Transaction(List<string> boughtProducts, int amountOfMoneySpent)
+        public List<string> BoughtProducts
         {
-            BoughtProducts = boughtProducts;
-            AmountOfSpentMoney = amountOfMoneySpent;
+            get
+            {
+                return boughtProducts;
+            }
+        }
 
+        public int AmountOfSpentMoney
+        {
+            get
+            {
+                return amountOfSpentMoney;
+            }
+        }
 
-            TimeOfPurchase = DateTime.Now;
+        public DateTime TimeOfPurchase
+        {
+            get
+            {
+                return timeOfPurchase;
+            }
         }
 
         public override string ToString()
@@ -30,15 +41,14 @@ namespace WebShop3
                 boughtProductformated += boughtProduct + "\n";
             }
 
-            string transactionData = boughtProductformated +
-                                                    "\n" +
-                                                    "The total sum is: "+
-                                                    AmountOfSpentMoney +
-                                                    " kr." +
-                                                    "\n\nTime of purchase: " +
-                                                    TimeOfPurchase +
-                                                    ".";
-            return transactionData;
+            string transactionDataFormated = boughtProductformated +
+                                                                   "\nThe total sum is: "+
+                                                                   AmountOfSpentMoney +
+                                                                   " kr." +
+                                                                   "\n\nTime of purchase: " +
+                                                                   TimeOfPurchase +
+                                                                   ".";
+            return transactionDataFormated;
         }
     }
 }
