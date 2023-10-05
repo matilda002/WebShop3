@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,22 @@ namespace WebShop3;
 
 public class User
 {
-    string email;
-    string passWord;
-    public User(string loginEmail, string loginPassWord)
+    public string Email;
+    public string PassWord;
+    public string Name;
+
+    public User()
     {
-        email = loginEmail;
-        passWord = loginPassWord;
+
+    }
+
+    public User(string name, string loginEmail, string loginPassWord)
+    {
+        Email = loginEmail;
+        PassWord = loginPassWord;
+        name = Name;
+
+        
     }
 }
 
