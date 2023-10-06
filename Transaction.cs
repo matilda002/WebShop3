@@ -6,42 +6,28 @@ using System.Threading.Tasks;
 
 namespace WebShop3
 {
-    public record Transaction(List<string> boughtProducts, int amountOfSpentMoney, DateTime timeOfPurchase)
+    /// <summary>
+    ///     A record type is used to indicate that this is primarily used to store data.  
+    /// </summary>
+    public record Transaction(List<Product> BoughtProducts, int AmountOfSpentMoney, DateTime TimeOfPurchase)
     {
-
-        public List<string> BoughtProducts
+        private string GetBoughtProductsFormated()
         {
-            get
+            string boughtProductformated = "Bought products: \n";
+            foreach (Product boughtProduct in BoughtProducts)
             {
-                return boughtProducts;
+                boughtProductformated += boughtProduct.Name +
+                                                             ", " +
+                                                             boughtProduct.Price +
+                                                             " kr" +
+                                                             "\n";
             }
-        }
-
-        public int AmountOfSpentMoney
-        {
-            get
-            {
-                return amountOfSpentMoney;
-            }
-        }
-
-        public DateTime TimeOfPurchase
-        {
-            get
-            {
-                return timeOfPurchase;
-            }
+            return boughtProductformated;
         }
 
         public override string ToString()
         {
-            string boughtProductformated = "Bought products: \n";
-            foreach (string boughtProduct in BoughtProducts)
-            {
-                boughtProductformated += boughtProduct + "\n";
-            }
-
-            string transactionDataFormated = boughtProductformated +
+            string transactionDataFormated = GetBoughtProductsFormated() +
                                                                    "\nThe total sum is: "+
                                                                    AmountOfSpentMoney +
                                                                    " kr." +
