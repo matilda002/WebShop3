@@ -9,20 +9,13 @@ namespace WebShop3;
 
 public class User
 {
-    public string Email;
-    public string PassWord;
-    public string Name;
-
-    public User()
+    public string UserName { get; set; }
+    public string PassWord { get; set; }
+    public User(string userName, string passWord)
     {
 
-    }
-
-    public User(string name, string loginEmail, string loginPassWord)
-    {
-        Email = loginEmail;
-        PassWord = loginPassWord;
-        name = Name;
+        UserName = userName;
+        PassWord = passWord;
 
         
     }
