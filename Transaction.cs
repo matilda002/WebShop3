@@ -10,14 +10,24 @@ namespace WebShop3
     ///     A record type is used to indicate that this is primarily used to store data.  
     /// </summary>
     /// <param name="BoughtProducts">
-    ///     This not a dictionary due to multiple 
+    ///     This is not represented by a dictionary in order to minimize boiler plate code.
     /// </param>
-    public record Transaction(Dictionary<string, int> BoughtProducts, int AmountOfSpentMoney, DateTime TimeOfPurchase)
+    public record Transaction(List<Product> BoughtProducts, DateTime TimeOfPurchase)
     {
+        public int GetAmountOfMoneySpent()
+        {
+            int amountOfMoneySpent = 0;
+            foreach (Product boughtProduct in BoughtProducts)
+            {
+                amountOfMoneySpent += boughtProduct.Price;
+            }
+            return amountOfMoneySpent;
+         }
+
         private string GetBoughtProductsFormated()
         {
             string boughtProductformated = "Bought products: \n";
-            foreach (KeyValuePair boughtProduct in BoughtProducts)
+            foreach (Product boughtProduct in BoughtProducts)
             {
                 boughtProductformated += boughtProduct.Name +
                                                              ", " +
@@ -32,7 +42,7 @@ namespace WebShop3
         {
             string transactionDataFormated = GetBoughtProductsFormated() +
                                                                    "\nThe total sum is: "+
-                                                                   AmountOfSpentMoney +
+                                                                   GetAmountOfMoneySpent() +
                                                                    " kr." +
                                                                    "\n\nTime of purchase: " +
                                                                    TimeOfPurchase +
