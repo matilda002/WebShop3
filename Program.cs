@@ -17,6 +17,8 @@ void SaveTransactionData(Transaction transaction, string userWhoOrdered)
 {
     string filePath = "../../../transaction_" +
                                userWhoOrdered +
+                               '_' +
+                               DateTime.Now.ToString("yyyyMMdd_hhmmss") +
                                ".txt";
     File.WriteAllText(filePath, transaction.ToString());
 }
