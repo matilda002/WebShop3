@@ -10,11 +10,13 @@ namespace WebShop3
     ///     A record type is used to indicate that this is primarily used to store data.  
     /// </summary>
     /// <param name="BoughtProducts">
-    ///     This is not represented by a dictionary in order to minimize boiler plate code.
+    ///     A record type is used to indicate that this is primarily used to store data.  
+    ///     The data is not represented by a dictionary due to user might buy
+    ///     multiple articles of the same type, which a dictionary cannot handle.
     /// </param>
     public record Transaction(List<Product> BoughtProducts, DateTime TimeOfPurchase)
     {
-        public int GetAmountOfMoneySpent()
+        private int GetAmountOfMoneySpent()
         {
             int amountOfMoneySpent = 0;
             foreach (Product boughtProduct in BoughtProducts)
