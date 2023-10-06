@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ public class LogIn : ILoginSystem
 {
     private List<User> users;
     public string UsersFilePath = ("../../../Users/Users.txt");
+    private string usersDirectory = ("../../../Users/Users.txt");
 
 
     public LogIn()
@@ -46,25 +48,42 @@ public class LogIn : ILoginSystem
 
         User newUser = new User(username, password);
         users.Add(newUser);
+
         SaveUsers(users);
-        Console.WriteLine("Registration successfull");
-        return true;
+
+        string userFilePath = Path.Combine(usersDirectory, $"{username}.txt");
+        try
+        {
+            File.WriteAllText(userFilePath, $"{username}, {password}");
+            Console.WriteLine("Registration successfull");
+            return true;
+        }
+
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to create user file: {ex.Message}");
+            return false;
+        }
     }
 
     private List<User> LoadUsers()
     {
         List<User> loadedUsers = new List<User>();
-        if (File.Exists(UsersFilePath))
+        if (Directory.Exists(usersDirectory))
         {
-            string[] lines = File.ReadAllLines(UsersFilePath);
-            foreach (string line in lines)
+            string[] userFiles = Directory.GetFiles(usersDirectory, "*.txt");
+            foreach (string userFile in userFiles)
             {
-                string[] parts = line.Split(", ");
-                if (parts.Length == 2)
+                string[] lines = File.ReadAllLines(userFile);
+                if(lines.Length == 1)
                 {
-                    string username = parts[0];
-                    string password = parts[1];
-                    loadedUsers.Add(new User(username, password));
+                    string[] parts = lines[0].Split(", ");
+                    if (parts.Length == 2)
+                    {
+                        string username = parts[0];
+                        string password = parts[1];
+                        loadedUsers.Add(new User(username, password));
+                    }
                 }
             }
         }
