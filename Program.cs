@@ -1,18 +1,16 @@
 ﻿using WebShop3;
 
-List<Product> boughtProducts = new List<Product>
+List<Product> _boughtProducts = new List<Product>
 {
     new Product("x", 1),
     new Product("y", 3),
     new Product("z", 5),
 };
 
-Transaction transaction = new Transaction(boughtProducts, 
-                                                                     22, 
-                                                                     DateTime.Now);
+Transaction _transaction = new Transaction(_boughtProducts, DateTime.Now);
 
-Console.WriteLine(transaction.ToString());
-SaveTransactionData(transaction,
+Console.WriteLine(_transaction.ToString());
+SaveTransactionData(_transaction,
                                     "user123");
 
 void SaveTransactionData(Transaction transaction, string userWhoOrdered)
