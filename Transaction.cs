@@ -9,12 +9,15 @@ namespace WebShop3
     /// <summary>
     ///     A record type is used to indicate that this is primarily used to store data.  
     /// </summary>
-    public record Transaction(List<Product> BoughtProducts, int AmountOfSpentMoney, DateTime TimeOfPurchase)
+    /// <param name="BoughtProducts">
+    ///     This not a dictionary due to multiple 
+    /// </param>
+    public record Transaction(Dictionary<string, int> BoughtProducts, int AmountOfSpentMoney, DateTime TimeOfPurchase)
     {
         private string GetBoughtProductsFormated()
         {
             string boughtProductformated = "Bought products: \n";
-            foreach (Product boughtProduct in BoughtProducts)
+            foreach (KeyValuePair boughtProduct in BoughtProducts)
             {
                 boughtProductformated += boughtProduct.Name +
                                                              ", " +

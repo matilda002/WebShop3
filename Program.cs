@@ -15,7 +15,7 @@ Console.WriteLine(transaction.ToString());
 SaveTransactionData(transaction,
                                     "user123");
 
- void SaveTransactionData(Transaction transaction, string userWhoOrdered)
+void SaveTransactionData(Transaction transaction, string userWhoOrdered)
 {
     string filePath = "../../../transaction_" +
                                userWhoOrdered +
