@@ -9,8 +9,7 @@ namespace WebShop3;
 public class LogIn : ILoginSystem
 {
     private List<User> users;
-    public string UsersFilePath = ("../../../Users/Users.txt");
-    private string usersDirectory = ("../../../Users/Users.txt");
+    
 
 
     public LogIn()
@@ -49,53 +48,32 @@ public class LogIn : ILoginSystem
         User newUser = new User(username, password);
         users.Add(newUser);
 
-        SaveUsers(users);
-
-        string userFilePath = Path.Combine(usersDirectory, $"{username}.txt");
-        try
-        {
-            File.WriteAllText(userFilePath, $"{username}, {password}");
-            Console.WriteLine("Registration successfull");
-            return true;
-        }
-
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Failed to create user file: {ex.Message}");
-            return false;
-        }
+        SaveUsers(newUser);
+        Console.WriteLine("Registration successful");
+        return true;
+        
     }
 
     private List<User> LoadUsers()
     {
         List<User> loadedUsers = new List<User>();
-        if (Directory.Exists(usersDirectory))
+        string[] userFiles = Directory.GetFiles("../../../Users", "*.txt");
+
+        foreach (string userFile in userFiles)
         {
-            string[] userFiles = Directory.GetFiles(usersDirectory, "*.txt");
-            foreach (string userFile in userFiles)
+            string[] lines = File.ReadAllLines(userFile);
+            if(lines.Length == 2)
             {
-                string[] lines = File.ReadAllLines(userFile);
-                if(lines.Length == 1)
-                {
-                    string[] parts = lines[0].Split(", ");
-                    if (parts.Length == 2)
-                    {
-                        string username = parts[0];
-                        string password = parts[1];
-                        loadedUsers.Add(new User(username, password));
-                    }
-                }
+                string username = lines[0];
+                string password = lines[1];
+                loadedUsers.Add(new User(username, password));
             }
         }
         return loadedUsers;
     }
-    private void SaveUsers(List<User> userList)
+    private void SaveUsers(User user)
     {
-        List<string> lines = new List<string>();
-        foreach(User user in userList)
-        {
-            lines.Add($"{user.UserName},{user.PassWord}");
-        }
-        File.WriteAllLines(UsersFilePath, lines);
+        string userFilePath = $"../../../Users/{user.UserName}.txt";
+        File.WriteAllText(userFilePath, $"{user.UserName}\n{user.PassWord}");
     }
 }
