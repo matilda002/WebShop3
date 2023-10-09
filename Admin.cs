@@ -1,8 +1,6 @@
-﻿using System.Threading.Channels;
+﻿namespace WebShop3;
 
-namespace WebShop3;
-
-public class Admin : TempoaryUser, IStockList
+public class Admin : TempoaryUser
 {
 
     public Admin (string username, string email) : base(username, email)
