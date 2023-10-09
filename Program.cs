@@ -3,4 +3,6 @@
 
 Console.WriteLine("Hello, World!");
 
-StockList.Stock();
+IStockList.StockMenu();
+
+Console.WriteLine("Welcome back");
