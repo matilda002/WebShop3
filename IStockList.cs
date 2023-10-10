@@ -7,18 +7,21 @@ public interface IStockList
     public static void StockMenu()
     {
         string? forward = string.Empty;
-        do
+        do // doing a loop since I don't want to return to the main menu until there's a valid answer
         {
             Console.Clear();
-            Console.Write("Do you want to edit the range of products?\nWrite 'y' or 'n':  ");
+            // asking if the user wants to go foward and change any products
+            Console.Write("Do you want to change the range of products?\nWrite 'y' (yes) or 'n' (no):  ");
             forward = Console.ReadLine()?.ToLower();
 
             switch (forward)
             {
                 case "y":
+                case "yes":
                     EditStock();
                     break;
                 case "n":
+                case "no":
                     Console.WriteLine("You have chosen to quit!");
                     break;
                 default:
