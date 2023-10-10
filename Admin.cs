@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebShop3
 {
-    internal class Admin
+    public class Admin
     {
     }
 }
