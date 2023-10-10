@@ -16,10 +16,10 @@ namespace WebShop3
         public Store()
         {
             AddAvailableProducts();
-            bool showMenu = true;
-            while (showMenu)
+            bool isMenuRunning = true;
+            while (isMenuRunning)
             {
-                showMenu = MainMenu();
+                isMenuRunning = DisplayStoreMenu();
             }
         }
 
@@ -34,19 +34,21 @@ namespace WebShop3
                 _availableProducts.Add(product);
             }
         }
-        private bool MainMenu()
-        {
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1) Show cart");
-            Console.WriteLine("2) Display store");
-            Console.WriteLine("3) Exit store");
 
-            switch (Console.ReadLine())
+        private bool DisplayStoreMenu()
+        {
+            Console.WriteLine("----------------------" +
+                                            "Choose an option:" +
+                                            "1) Show cart" +
+                                            "2) Display store" +
+                                            "3) Exit store" + 
+                                            "----------------------");
+            switch (Console.Read())
             {
-                case "1":
-                    ShowCart();
+                case '1':
+                    DisplayCart();
                     return true;
-                case "2":
+                case '2':
                     DisplayStore();
                     return true;
                 default: 
@@ -54,20 +56,37 @@ namespace WebShop3
             }
         }
 
-        private void ShowCart()
+        private void DisplayProductData(List<Product> productsToShow)
+        {
+            for (int index = 0; index < productsToShow.Count; index++)
+            {
+                Product product = productsToShow[index];
+                Console.WriteLine(index +
+                                                " Name: " +
+                                                product.Name +
+                                                "\n  Price: " +
+                                                product.Price);
+            }
+        }
+
+        private void RemoveProductInCart()
+        {
+            Console.WriteLine("Do you want to remove a product from the cart? [y/n]");
+            if (Console.ReadLine() == "y")
+            {
+                Console.WriteLine("Specify the index.");
+                int indexOfProductToRemoveFromCart = int.Parse(Console.ReadLine());
+                _productsInCart.RemoveAt(indexOfProductToRemoveFromCart);
+            }
+        }
+
+        private void DisplayCart()
         {
             if (_productsInCart.Count > 0)
             {
                 Console.WriteLine("----------------------\nItems in cart: \n----------------------");
-                for (int index = 0; index < _productsInCart.Count; index++)
-                {
-                    Product product = _availableProducts[index];
-                    Console.WriteLine(index +
-                                                    " Name: " +
-                                                    product.Name +
-                                                    "\n  Price: " +
-                                                    product.Price);
-                }
+                DisplayProductData(_productsInCart);
+                RemoveProductInCart();
             }
             else
             {
@@ -75,19 +94,27 @@ namespace WebShop3
             }
         }
 
+        private bool AddProductToCart()
+        {
+            Console.WriteLine("\n\n\nDo you want to add a product to the cart? [y/n]");
+            if (Console.ReadLine() == "y")
+            {
+                Console.WriteLine("Specify the index.");
+                int indexOfProductToAddToCart = int.Parse(Console.ReadLine());
+                _productsInCart.Add(_availableProducts[indexOfProductToAddToCart]);
+                return false;
+            }
+            return true;
+        }
+
         private void DisplayStore()
         {
-            for (int index = 0; index < _availableProducts.Count; index++)
+            bool isMenuRunning = true;
+            while (isMenuRunning)
             {
-                Product product = _availableProducts[index];
-                Console.WriteLine(index +
-                                                " Name: " +
-                                                product.Name +
-                                                "\n  Price: " +
-                                                product.Price);
+                DisplayProductData(_availableProducts);
+                isMenuRunning = AddProductToCart();
             }
-            int currentBoughtProductIndex = int.Parse(Console.ReadLine());
-            _productsInCart.Add(_availableProducts[currentBoughtProductIndex]);
         }
     }
 }
