@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace WebShop3
     public class Store
     {
         List<Product> _availableProducts = new List<Product>();
-        List<Product> _boughtProducts = new List<Product>();
+        List<Product> _productsInCart = new List<Product>();
 
         public Store()
         {
@@ -55,9 +56,22 @@ namespace WebShop3
 
         private void ShowCart()
         {
-            foreach (var item in collection)
+            if (_productsInCart.Count > 0)
             {
-
+                Console.WriteLine("----------------------\nItems in cart: \n----------------------");
+                for (int index = 0; index < _productsInCart.Count; index++)
+                {
+                    Product product = _availableProducts[index];
+                    Console.WriteLine(index +
+                                                    " Name: " +
+                                                    product.Name +
+                                                    "\n  Price: " +
+                                                    product.Price);
+                }
+            }
+            else
+            {
+                Console.WriteLine("----------------------\nThe cart is empty\n----------------------");
             }
         }
 
@@ -66,14 +80,14 @@ namespace WebShop3
             for (int index = 0; index < _availableProducts.Count; index++)
             {
                 Product product = _availableProducts[index];
-                Console.WriteLine((index) +
-                                                " Name of product: " +
+                Console.WriteLine(index +
+                                                " Name: " +
                                                 product.Name +
-                                                "\n  Price of product: " +
+                                                "\n  Price: " +
                                                 product.Price);
             }
             int currentBoughtProductIndex = int.Parse(Console.ReadLine());
-            _boughtProducts.Add(_availableProducts[currentBoughtProductIndex]);
+            _productsInCart.Add(_availableProducts[currentBoughtProductIndex]);
         }
     }
 }
