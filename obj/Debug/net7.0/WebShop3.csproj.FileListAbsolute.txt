@@ -1,0 +1,14 @@
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\WebShop3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\WebShop3.AssemblyInfoInputs.cache
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\WebShop3.AssemblyInfo.cs
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\WebShop3.csproj.CoreCompileInputs.cache
+C:\Users\kevin\source\repos\WebShop3\WebShop3\bin\Debug\net7.0\WebShop3.exe
+C:\Users\kevin\source\repos\WebShop3\WebShop3\bin\Debug\net7.0\WebShop3.deps.json
+C:\Users\kevin\source\repos\WebShop3\WebShop3\bin\Debug\net7.0\WebShop3.runtimeconfig.json
+C:\Users\kevin\source\repos\WebShop3\WebShop3\bin\Debug\net7.0\WebShop3.dll
+C:\Users\kevin\source\repos\WebShop3\WebShop3\bin\Debug\net7.0\WebShop3.pdb
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\WebShop3.dll
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\refint\WebShop3.dll
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\WebShop3.pdb
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\WebShop3.genruntimeconfig.cache
+C:\Users\kevin\source\repos\WebShop3\WebShop3\obj\Debug\net7.0\ref\WebShop3.dll
