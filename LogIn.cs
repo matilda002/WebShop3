@@ -9,9 +9,6 @@ namespace WebShop3;
 public class LogIn : ILoginSystem
 {
     private List<User> users;
-    
-
-
     public LogIn()
     {
         users = LoadUsers();
@@ -51,7 +48,6 @@ public class LogIn : ILoginSystem
         SaveUsers(newUser);
         Console.WriteLine("Registration successful");
         return true;
-        
     }
 
     private List<User> LoadUsers()
