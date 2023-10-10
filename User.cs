@@ -13,11 +13,9 @@ public class User
     public string PassWord { get; set; }
     public User(string userName, string passWord)
     {
-
         UserName = userName;
         PassWord = passWord;
-
-        
     }
+    
 }
 

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebShop3
-{
-    public class Admin
-    {
+namespace WebShop3;
 
-    }
+internal class Items
+{
 }
