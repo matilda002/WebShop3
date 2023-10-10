@@ -11,7 +11,3 @@ public class Cart : LogIn
     public List<string> CurrentCart = new List<string>();
 }
 
-public void AddToCart()
-{
-    Cart cart = new Cart();
-}

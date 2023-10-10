@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace WebShop3;
 
-internal class Items
+public class Items
 {
+    public string Item;
+    public int Cost;
+
+    public Items(string item, int cost)
+    {
+        item = Item;
+        cost = Cost;
+    }
 }
