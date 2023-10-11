@@ -2,9 +2,6 @@
 
 public class Admin : IStockMenu
 {
-    // list for stock and price
-    public List<string> stock = new List<string>();
-    public List<int> price = new List<int>();
     // dictonary for items in stock with their price
     public Dictionary<string, int> stockPrice = new Dictionary<string, int>();
 
@@ -69,51 +66,55 @@ public class Admin : IStockMenu
     }
 
     // add items to stock, does not work with several items
-    public void AddItems()
+    private void AddItems()
     {
         Console.Clear();
 
-        // admin cannot enter an item if the answer is null
         string? inputItem = string.Empty;
-        while (inputItem.Length == 0)
+        bool validItem = false;
+        while (inputItem?.Length == 0 && !validItem)
         {
-            Console.Write("Add item to list: ");
+            Console.Write("Item: ");
             inputItem = Console.ReadLine()?.ToLower();
-            stock.Add(inputItem);
-        }
-
-        bool validPrice = false;
-        while (!validPrice)
-        {
-            // admin setting a price for the corresponding item
-            Console.Write("Set a price for " + inputItem + ": ");
-            bool parsePrice = int.TryParse(Console.ReadLine()?.ToLower(), out int successful); // parse to make sure the price contains just numbers
-
-            if (parsePrice == true)
+            if (!stockPrice.ContainsKey(inputItem) && inputItem?.Length != 0) // empty inputs shall not become an item, therefore second condition is added
             {
-                price.Add(successful);
-                validPrice = true;
+                InputPrice();
+                validItem = true;
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Not a valid input, try again by pressing the ENTER key");
+                Console.WriteLine(inputItem + " already exists in range of products!\n Press the ENTER key to try again");
                 Console.ReadKey();
             }
-        }
 
-        // adding the item + price in the dictonary
-        for (int i = 0; i < stock.Count; i++)
+        }
+        void InputPrice() // making sure price cannot be accessed if the inputItem is unvalid
         {
-            for (int j = 0; j < price.Count; j++)
+            bool validPrice = false;
+            while (!validPrice)
             {
-                stockPrice.Add(stock[i], price[j]);
+                Console.Clear();
+                // admin setting a price for the corresponding item
+                Console.Write("Set a price for " + inputItem + ": ");
+                bool parsePrice = int.TryParse(Console.ReadLine(), out int successful); // parse to make sure the price contains just numbers
+
+                if (parsePrice == true)
+                {
+                    stockPrice.Add(inputItem, successful);
+                    validPrice = true;
+                }
+                else
+                {
+                    Console.WriteLine("Not a valid input, try again by pressing the ENTER key");
+                    Console.ReadKey();
+                }
             }
         }
     }
 
     // remove items from stock
-    public void RemoveItems()
+    private void RemoveItems()
     {
         // delete items from dictonary, admin need to type in the specific item
         bool validInput = false;
