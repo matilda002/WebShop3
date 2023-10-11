@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebShop3;
+﻿namespace WebShop3;
 public class LogIn : ILoginSystem
 {
     private List<User> users;
@@ -58,7 +51,7 @@ public class LogIn : ILoginSystem
         foreach (string userFile in userFiles)
         {
             string[] lines = File.ReadAllLines(userFile);
-            if(lines.Length == 2)
+            if (lines.Length == 2)
             {
                 string username = lines[0];
                 string password = lines[1];
