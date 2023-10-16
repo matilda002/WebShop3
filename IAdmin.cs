@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace WebShop3;
 
-public interface ILoginSystem
+internal interface IAdmin
 {
     bool Login(string userName, string passWord);
-    void Logout();
-
-    bool Register(string userName, string passWord);
+    
 }
