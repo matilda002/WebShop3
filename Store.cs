@@ -41,12 +41,12 @@ namespace WebShop3
             DisplayHelpText();
             do
             {
-                if (Console.ReadKey(false).Key == ConsoleKey.UpArrow &&
+                if (Console.ReadKey().Key == ConsoleKey.UpArrow &&
                      index < (int)BinaryDialogueChoice.No)
                 {
                     index++;
                 }
-                else if (Console.ReadKey(false).Key == ConsoleKey.DownArrow &&
+                else if (Console.ReadKey().Key == ConsoleKey.DownArrow &&
                             index > 0)
                 {
                     index--;
@@ -69,12 +69,12 @@ namespace WebShop3
             DisplayHelpText();
             do
             {
-                if (Console.ReadKey(false).Key == ConsoleKey.UpArrow &&
+                if (Console.ReadKey().Key == ConsoleKey.UpArrow &&
                      index < _availableProducts.Count - 1)
                 {
                     index++;
                 }
-                else if (Console.ReadKey(false).Key == ConsoleKey.DownArrow &&
+                else if (Console.ReadKey().Key == ConsoleKey.DownArrow &&
                             index > 0)
                 {
                     index--;
@@ -212,14 +212,15 @@ namespace WebShop3
 
         private void DisplayStoreMenu()
         {
-            Console.WriteLine("\nChoose an option:\n" +
-                                            NumericalDialogueAnswer.Zero +
-                                            ") Display cart\n" +
-                                            NumericalDialogueAnswer.One +
-                                            ") Display store\n" +
-                                            NumericalDialogueAnswer.Two +
-                                            ") Exit\n");
-            Console.Write("\r\nSelect an option: ");
+            Console.WriteLine();
+            Console.Write("\nChoose an option:\n" +
+                                     NumericalDialogueAnswer.Zero +
+                                     ") Display cart\n" +
+                                     NumericalDialogueAnswer.One +
+                                     ") Display store\n" +
+                                     NumericalDialogueAnswer.Two +
+                                     ") Exit\n" +
+                                     "\r\nSelect an option: ");
         }
 
         private void DisplayStore()
