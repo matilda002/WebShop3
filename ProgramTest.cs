@@ -5,7 +5,7 @@
 
 
 /*
-Admin test = new Admin();
+ProductMenu test = new ProductMenu();
 
 test.StockMenu();
 
