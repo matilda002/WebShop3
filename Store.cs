@@ -10,11 +10,19 @@ namespace WebShop3
 {
     public class Store
     {
-        List<Product> _availableProducts = new List<Product>();
-        List<Product> _productsInCart = new List<Product>();
+        private List<Product> _availableProducts;
+        private List<Product> _productsInCart;
 
         public Store()
         {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            _availableProducts = new List<Product>();
+            _productsInCart = new List<Product>();
+
             AddAvailableProducts();
 
             bool isMenuRunning = true;
@@ -23,34 +31,6 @@ namespace WebShop3
                 DisplayStoreMenu();
                 isMenuRunning = StoreMenuInput();
             }
-        }
-
-        private void AddAvailableProducts()
-        {
-            string[] availableProductsRepresentedByStrings = File.ReadAllLines("../../../Products.txt");
-
-            foreach (string productRepresentedByString in availableProductsRepresentedByStrings)
-            {
-                string separator = ", ";
-                string[] separatedProductFields = productRepresentedByString.Split(separator);
-
-                int firstFieldIndex = 0;
-                int secondFieldIndex = 1;
-                Product product = new Product(separatedProductFields[firstFieldIndex], int.Parse(separatedProductFields[secondFieldIndex]));
-                _availableProducts.Add(product);
-            }
-        }
-
-        private void DisplayStoreMenu()
-        {
-            Console.WriteLine("\nChoose an option:\n" +
-                                            NumericalDialogueAnswer.Zero +
-                                            ") Display cart\n" +
-                                            NumericalDialogueAnswer.One +
-                                            ") Display store\n" +
-                                            NumericalDialogueAnswer.Two +
-                                            ") Exit\n");
-            Console.Write("\r\nSelect an option: ");
         }
 
         private BinaryDialogueChoice GetBinaryDialogueAnswer()
@@ -108,6 +88,7 @@ namespace WebShop3
 
             return dialogueAnswer;
         }
+
         private bool StoreMenuInput()
         {
             switch (GetNumericalDialogueAnswer())
@@ -123,20 +104,6 @@ namespace WebShop3
                 default:
                     return true;
             }
-        }
-
-        private void DisplayProductData(List<Product> productsToShow)
-        {
-            for (int index = 0; index < productsToShow.Count; index++)
-            {
-                Product product = productsToShow[index];
-                Console.WriteLine($"{index} Name: {product.Name}\n  Price: {product.Price}");
-            }
-        }
-
-        private void DisplayHelpText()
-        {
-            Console.WriteLine("Press arrow keys to change index. Press Esc to stop.");
         }
 
         public static void ClearCurrentConsoleLine()
@@ -172,6 +139,22 @@ namespace WebShop3
             return index;
         }
 
+        private void AddAvailableProducts()
+        {
+            string[] availableProductsRepresentedByStrings = File.ReadAllLines("../../../Products.txt");
+
+            foreach (string productRepresentedByString in availableProductsRepresentedByStrings)
+            {
+                string separator = ", ";
+                string[] separatedProductFields = productRepresentedByString.Split(separator);
+
+                int firstFieldIndex = 0;
+                int secondFieldIndex = 1;
+                Product product = new Product(separatedProductFields[firstFieldIndex], int.Parse(separatedProductFields[secondFieldIndex]));
+                _availableProducts.Add(product);
+            }
+        }
+
         private void RemoveProductInCart()
         {
             string removeDialogue = "Do you want to remove a product from the cart? [" +
@@ -184,21 +167,6 @@ namespace WebShop3
             if (GetBinaryDialogueAnswer() == BinaryDialogueChoice.Yes)
             {
                 _productsInCart.RemoveAt(ParseIndexInput());
-            }
-        }
-
-        private void DisplayCart()
-        {
-            int minimalCartSize = 0;
-            if (_productsInCart.Count > minimalCartSize)
-            {
-                Console.WriteLine("----------------------\nItems in cart: \n----------------------");
-                DisplayProductData(_productsInCart);
-                RemoveProductInCart();
-            }
-            else
-            {
-                Console.WriteLine("----------------------\nThe cart is empty\n----------------------");
             }
         }
 
@@ -218,6 +186,42 @@ namespace WebShop3
             return true;
         }
 
+        private void DisplayCart()
+        {
+            int minimalCartSize = 0;
+            if (_productsInCart.Count > minimalCartSize)
+            {
+                Console.WriteLine("----------------------\nItems in cart: \n----------------------");
+                DisplayProductData(_productsInCart);
+                RemoveProductInCart();
+            }
+            else
+            {
+                Console.WriteLine("----------------------\nThe cart is empty\n----------------------");
+            }
+        }
+
+        private void DisplayProductData(List<Product> productsToShow)
+        {
+            for (int index = 0; index < productsToShow.Count; index++)
+            {
+                Product product = productsToShow[index];
+                Console.WriteLine($"{index} Name: {product.Name}\n  Price: {product.Price}");
+            }
+        }
+
+        private void DisplayStoreMenu()
+        {
+            Console.WriteLine("\nChoose an option:\n" +
+                                            NumericalDialogueAnswer.Zero +
+                                            ") Display cart\n" +
+                                            NumericalDialogueAnswer.One +
+                                            ") Display store\n" +
+                                            NumericalDialogueAnswer.Two +
+                                            ") Exit\n");
+            Console.Write("\r\nSelect an option: ");
+        }
+
         private void DisplayStore()
         {
             bool isMenuRunning = true;
@@ -227,5 +231,11 @@ namespace WebShop3
                 isMenuRunning = AddProductToCart();
             }
         }
+
+        private void DisplayHelpText()
+        {
+            Console.WriteLine("Press arrow keys to change index. Press Esc to stop.");
+        }
+
     }
 }
