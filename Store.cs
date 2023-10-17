@@ -16,10 +16,12 @@ namespace WebShop3
         public Store()
         {
             AddAvailableProducts();
+
             bool isMenuRunning = true;
             while (isMenuRunning)
             {
-                isMenuRunning = DisplayStoreMenu();
+                DisplayStoreMenu();
+                isMenuRunning = StoreMenuInput();
             }
         }
 
@@ -29,30 +31,97 @@ namespace WebShop3
 
             foreach (string productRepresentedByString in availableProductsRepresentedByStrings)
             {
-                string[] productFieldSeperated = productRepresentedByString.Split(", ");
-                Product product = new Product(productFieldSeperated[0], int.Parse(productFieldSeperated[1]));
+                string separator = ", ";
+                string[] separatedProductFields = productRepresentedByString.Split(separator);
+
+                int firstFieldIndex = 0;
+                int secondFieldIndex = 1;
+                Product product = new Product(separatedProductFields[firstFieldIndex], int.Parse(separatedProductFields[secondFieldIndex]));
                 _availableProducts.Add(product);
             }
         }
 
-        private bool DisplayStoreMenu()
+        private void DisplayStoreMenu()
         {
-            Console.WriteLine("----------------------" +
-                                            "Choose an option:" +
-                                            "1) Show cart" +
-                                            "2) Display store" +
-                                            "3) Exit store" + 
-                                            "----------------------");
-            switch (Console.Read())
+            Console.WriteLine("\nChoose an option:\n" +
+                                            NumericalDialogueAnswer.Zero +
+                                            ") Display cart\n" +
+                                            NumericalDialogueAnswer.One +
+                                            ") Display store\n" +
+                                            NumericalDialogueAnswer.Two +
+                                            ") Exit\n");
+            Console.Write("\r\nSelect an option: ");
+        }
+
+        private BinaryDialogueChoice GetBinaryDialogueAnswer()
+        {
+            BinaryDialogueChoice dialogueAnswer;
+
+            int index = 0;
+            DisplayHelpText();
+            do
             {
-                case '1':
+                if (Console.ReadKey(false).Key == ConsoleKey.UpArrow &&
+                     index < (int)BinaryDialogueChoice.No)
+                {
+                    index++;
+                }
+                else if (Console.ReadKey(false).Key == ConsoleKey.DownArrow &&
+                            index > 0)
+                {
+                    index--;
+                }
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                ClearCurrentConsoleLine();
+
+                dialogueAnswer = (BinaryDialogueChoice)Enum.GetValues(typeof(BinaryDialogueChoice)).GetValue(index);
+                Console.WriteLine(dialogueAnswer);
+            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
+            return dialogueAnswer;
+        }
+
+        private NumericalDialogueAnswer GetNumericalDialogueAnswer()
+        {
+            NumericalDialogueAnswer dialogueAnswer;
+
+            int index = 0;
+            DisplayHelpText();
+            do
+            {
+                if (Console.ReadKey(false).Key == ConsoleKey.UpArrow &&
+                     index < _availableProducts.Count - 1)
+                {
+                    index++;
+                }
+                else if (Console.ReadKey(false).Key == ConsoleKey.DownArrow &&
+                            index > 0)
+                {
+                    index--;
+                }
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                ClearCurrentConsoleLine();
+
+                dialogueAnswer = (NumericalDialogueAnswer)Enum.GetValues(typeof(NumericalDialogueAnswer)).GetValue(index);
+                Console.WriteLine(dialogueAnswer);
+            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
+            return dialogueAnswer;
+        }
+        private bool StoreMenuInput()
+        {
+            switch (GetNumericalDialogueAnswer())
+            {
+                case NumericalDialogueAnswer.Zero:
                     DisplayCart();
                     return true;
-                case '2':
+                case NumericalDialogueAnswer.One:
                     DisplayStore();
                     return true;
-                default: 
+                case NumericalDialogueAnswer.Two:
                     return false;
+                default:
+                    return true;
             }
         }
 
@@ -61,28 +130,67 @@ namespace WebShop3
             for (int index = 0; index < productsToShow.Count; index++)
             {
                 Product product = productsToShow[index];
-                Console.WriteLine(index +
-                                                " Name: " +
-                                                product.Name +
-                                                "\n  Price: " +
-                                                product.Price);
+                Console.WriteLine($"{index} Name: {product.Name}\n  Price: {product.Price}");
             }
+        }
+
+        private void DisplayHelpText()
+        {
+            Console.WriteLine("Press arrow keys to change index. Press Esc to stop.");
+        }
+
+        public static void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
+        }
+
+        // This uses integers and arrow keys to select index
+        private int ParseIndexInput()
+        {
+            int index = 1;
+            DisplayHelpText();
+            do
+            {
+                switch (Console.ReadKey(false).Key)
+                {
+                    case ConsoleKey.UpArrow when index < _availableProducts.Count:
+                        index++;
+                        break;
+                    case ConsoleKey.DownArrow when index > 0:
+                        index--;
+                        break;
+                }
+
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                ClearCurrentConsoleLine();
+                Console.WriteLine(index);
+
+            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+            return index;
         }
 
         private void RemoveProductInCart()
         {
-            Console.WriteLine("Do you want to remove a product from the cart? [y/n]");
-            if (Console.ReadLine() == "y")
+            string removeDialogue = "Do you want to remove a product from the cart? [" +
+                                                     BinaryDialogueChoice.Yes +
+                                                     "/" +
+                                                     BinaryDialogueChoice.No +
+                                                     "]";
+            Console.WriteLine(removeDialogue);
+
+            if (GetBinaryDialogueAnswer() == BinaryDialogueChoice.Yes)
             {
-                Console.WriteLine("Specify the index.");
-                int indexOfProductToRemoveFromCart = int.Parse(Console.ReadLine());
-                _productsInCart.RemoveAt(indexOfProductToRemoveFromCart);
+                _productsInCart.RemoveAt(ParseIndexInput());
             }
         }
 
         private void DisplayCart()
         {
-            if (_productsInCart.Count > 0)
+            int minimalCartSize = 0;
+            if (_productsInCart.Count > minimalCartSize)
             {
                 Console.WriteLine("----------------------\nItems in cart: \n----------------------");
                 DisplayProductData(_productsInCart);
@@ -96,12 +204,15 @@ namespace WebShop3
 
         private bool AddProductToCart()
         {
-            Console.WriteLine("\n\n\nDo you want to add a product to the cart? [y/n]");
-            if (Console.ReadLine() == "y")
+            string addDialogue = "Do you want to add a product to the cart? [" +
+                                                 BinaryDialogueChoice.Yes +
+                                                 "/" +
+                                                 BinaryDialogueChoice.No +
+                                                 "]";
+            Console.WriteLine(addDialogue);
+            if (GetBinaryDialogueAnswer() == BinaryDialogueChoice.Yes)
             {
-                Console.WriteLine("Specify the index.");
-                int indexOfProductToAddToCart = int.Parse(Console.ReadLine());
-                _productsInCart.Add(_availableProducts[indexOfProductToAddToCart]);
+                _productsInCart.Add(_availableProducts[ParseIndexInput()]);
                 return false;
             }
             return true;
