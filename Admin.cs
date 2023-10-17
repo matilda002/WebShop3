@@ -67,7 +67,12 @@ namespace WebShop3
         }
         public void DeleteProduct()
         {
+            string[] productFile = File.ReadAllLines("products.cvs");
 
+            for (int i = 0; i < productFile.Length; i++)
+            {
+
+            }
         }
     }
 }
