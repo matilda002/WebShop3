@@ -90,7 +90,6 @@ namespace WebShop3
                 int indexOffset = 1;
                 index = GetIndex(index, _availableProducts.Count - indexOffset);
 
-                int cursorOffset = 1;
                 UpdateIndexUserInterface();
 
                 dialogueAnswer = (NumericalDialogueAnswer)Enum.GetValues(typeof(NumericalDialogueAnswer)).GetValue(index);
@@ -108,7 +107,6 @@ namespace WebShop3
             {
                 index = GetIndex(index, _availableProducts.Count - 1);
 
-                int offset = 1;
                 UpdateIndexUserInterface();
                 Console.WriteLine(index);
 
