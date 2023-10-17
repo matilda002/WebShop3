@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,14 @@ namespace WebShop3
             return index;
         }
 
+        private void UpdateIndexUserInterface()
+        {
+            int lowestPosition = 0;
+            int highestPositionOffset = 1;
+            Console.SetCursorPosition(lowestPosition, Console.CursorTop - highestPositionOffset);
+            ClearCurrentConsoleLine();
+        }
+
         private BinaryDialogueChoice GetBinaryDialogueAnswer()
         {
             BinaryDialogueChoice dialogueAnswer;
@@ -56,11 +65,10 @@ namespace WebShop3
             Console.WriteLine(GetHelpText());
             do
             {
-                int lowestIndex = 0;
                 // BinaryDialogueChoice.No is the highest value.
                 index = GetIndex(index, (int)BinaryDialogueChoice.No);
-                Console.SetCursorPosition(0, Console.CursorTop - 1);
-                ClearCurrentConsoleLine();
+                
+                UpdateIndexUserInterface();
 
                 dialogueAnswer = (BinaryDialogueChoice)Enum.GetValues(typeof(BinaryDialogueChoice)).GetValue(index);
                 Console.WriteLine(dialogueAnswer);
@@ -83,8 +91,7 @@ namespace WebShop3
                 index = GetIndex(index, _availableProducts.Count - indexOffset);
 
                 int cursorOffset = 1;
-                Console.SetCursorPosition(0, Console.CursorTop - cursorOffset);
-                ClearCurrentConsoleLine();
+                UpdateIndexUserInterface();
 
                 dialogueAnswer = (NumericalDialogueAnswer)Enum.GetValues(typeof(NumericalDialogueAnswer)).GetValue(index);
                 Console.WriteLine(dialogueAnswer);
@@ -93,7 +100,7 @@ namespace WebShop3
         }
 
         // This uses integers and arrow keys to select index
-        private int GetInputIndex()
+        private int GetListIndex()
         {
             int index = 1;
             Console.WriteLine(GetHelpText());
@@ -102,8 +109,7 @@ namespace WebShop3
                 index = GetIndex(index, _availableProducts.Count - 1);
 
                 int offset = 1;
-                Console.SetCursorPosition(0, Console.CursorTop - offset);
-                ClearCurrentConsoleLine();
+                UpdateIndexUserInterface();
                 Console.WriteLine(index);
 
             } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
@@ -164,7 +170,7 @@ namespace WebShop3
 
             if (GetBinaryDialogueAnswer() == BinaryDialogueChoice.Yes)
             {
-                _productsInCart.RemoveAt(GetInputIndex());
+                _productsInCart.RemoveAt(GetListIndex());
             }
         }
 
@@ -178,7 +184,7 @@ namespace WebShop3
             Console.WriteLine(addDialogue);
             if (GetBinaryDialogueAnswer() == BinaryDialogueChoice.Yes)
             {
-                _productsInCart.Add(_availableProducts[GetInputIndex()]);
+                _productsInCart.Add(_availableProducts[GetListIndex()]);
                 return false;
             }
             return true;
