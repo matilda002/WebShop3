@@ -94,7 +94,7 @@ public class EditProduct
             }
             
 
-            Console.WriteLine("\nPress the ENTER key to continue!"); // holding program so the user can see the result before clearing screen
+            Console.WriteLine("\nPress the ENTER key to return to menu!"); // holding program so the user can see the result before clearing screen
             Console.ReadKey();
         }
     }
