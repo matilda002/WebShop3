@@ -9,8 +9,12 @@ Admin test = new Admin();
 
 test.StockMenu();
 
-foreach (var line in test.stockPrice)
+Console.Clear();
+
+string[] p = File.ReadAllLines("../../../products.csv");
+
+foreach (var item in p)
 {
-    Console.WriteLine(line);
+    Console.WriteLine(item);
 }
 */

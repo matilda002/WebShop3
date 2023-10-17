@@ -1,11 +1,17 @@
 ﻿using System.Diagnostics;
 using WebShop3;
 
-Admin test = new Admin();
+
+ProductMenu test = new ProductMenu();
 
 test.StockMenu();
 
-foreach (var line in test.stockPrice)
+Console.Clear();
+
+string[] p = File.ReadAllLines("../../../products.csv");
+
+foreach (var item in p)
 {
-    Console.WriteLine(line);
+    Console.WriteLine(item);
 }
+
