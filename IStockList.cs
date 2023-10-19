@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace WebShop3;
+﻿namespace WebShop3;
 
 public interface IStockList
 {

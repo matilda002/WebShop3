@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using WebShop3;
@@ -20,3 +21,8 @@ if (loginSystem.Register(username, password))
     Console.WriteLine("You are now a registered user");
 }
 
+=======
+﻿using System.Diagnostics;
+using WebShop3;
+
+>>>>>>> main
