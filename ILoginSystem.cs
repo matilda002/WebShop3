@@ -7,4 +7,5 @@ public interface ILoginSystem
     void Logout();
 
     bool Register(string username, string password, UserRole role);
+    
 }

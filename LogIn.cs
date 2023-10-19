@@ -10,14 +10,16 @@ public class LogIn : ILoginSystem
     {
         User user = users.Find(u => u.UserName == username && u.PassWord == password);
 
-        if (user.Role == UserRole.Admin)
+        if (user != null)
         {
-            Console.WriteLine(user.Role + " logged in,welcome, " + username + ", you are now logged in");
-            return true;
-        }
-        else if (user.Role == UserRole.User)
-        {
-            Console.WriteLine("Welcome, " + username + ", you are now logged in");
+            if (user.Role == UserRole.Admin)
+            {
+                Console.WriteLine(user.Role + " logged in, welcome, " + username);
+            }
+            else if (user.Role == UserRole.User)
+            {
+                Console.WriteLine("Welcome, " + username + ", you are now logged in");
+            }
             return true;
         }
         else
@@ -25,6 +27,7 @@ public class LogIn : ILoginSystem
             Console.WriteLine("Log in failed");
             return false;
         }
+
     }
 
     public void Logout()
@@ -74,6 +77,6 @@ public class LogIn : ILoginSystem
     private void SaveUsers(User user)
     {
         string userFilePath = $"../../../Users/{user.UserName}.txt";
-        File.WriteAllText(userFilePath, $"{user.UserName}\n{user.PassWord}");
+        File.WriteAllText(userFilePath, $"{user.UserName}\n{user.PassWord}\n{user.Role}");
     }
 }
