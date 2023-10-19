@@ -36,16 +36,21 @@ public class LogIn : ILoginSystem
     {
         if (users.Exists(u => u.UserName == username))
         {
-            Console.WriteLine("Username already exists. Registration failed.");
-            return false;
+            Console.WriteLine("Logging in...");
+            return true;
         }
 
-        User newUser = new User(username, password, UserRole.User);
+        User newUser = new User(username, password, role);
         users.Add(newUser);
 
-        SaveUsers(newUser);
-        Console.WriteLine("Registration successful");
-        return true;
+        string userFilePath = $"../../../Users/{username}.txt";
+        if (!File.Exists(userFilePath))
+        {
+            SaveUsers(newUser);
+            Console.WriteLine("Registration successful");
+        }
+
+        return false;
     }
 
     private List<User> LoadUsers()

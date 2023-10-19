@@ -1,5 +1,6 @@
 ﻿namespace WebShop3;
 
+
 public interface ILoginSystem
 {
     bool Login(string username, string password);
