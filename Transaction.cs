@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebShop3
+﻿namespace WebShop3
 {
     /// <summary>
     ///     A record type is used to indicate that this is primarily used to store data.  
@@ -24,7 +18,7 @@ namespace WebShop3
                 amountOfMoneySpent += boughtProduct.Price;
             }
             return amountOfMoneySpent;
-         }
+        }
 
         private string GetBoughtProductsFormated()
         {
@@ -43,7 +37,7 @@ namespace WebShop3
         public override string ToString()
         {
             string transactionDataFormated = GetBoughtProductsFormated() +
-                                                                   "\nThe total sum is: "+
+                                                                   "\nThe total sum is: " +
                                                                    GetAmountOfMoneySpent() +
                                                                    " kr." +
                                                                    "\n\nTime of purchase: " +
