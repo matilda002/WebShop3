@@ -10,14 +10,19 @@ public class LogIn : ILoginSystem
     {
         User user = users.Find(u => u.UserName == username && u.PassWord == password);
 
-        if (user != null)
+        if (user.Role == UserRole.Admin)
+        {
+            Console.WriteLine(user.Role + " logged in,welcome, " + username + ", you are now logged in");
+            return true;
+        }
+        else if (user.Role == UserRole.User)
         {
             Console.WriteLine("Welcome, " + username + ", you are now logged in");
             return true;
         }
         else
         {
-            Console.WriteLine("Login failed");
+            Console.WriteLine("Log in failed");
             return false;
         }
     }
@@ -27,7 +32,7 @@ public class LogIn : ILoginSystem
         Console.WriteLine("Logged out");
     }
 
-    public bool Register(string username, string password)
+    public bool Register(string username, string password, UserRole role = UserRole.User)
     {
         if (users.Exists(u => u.UserName == username))
         {
@@ -35,7 +40,7 @@ public class LogIn : ILoginSystem
             return false;
         }
 
-        User newUser = new User(username, password);
+        User newUser = new User(username, password, UserRole.User);
         users.Add(newUser);
 
         SaveUsers(newUser);
@@ -51,11 +56,12 @@ public class LogIn : ILoginSystem
         foreach (string userFile in userFiles)
         {
             string[] lines = File.ReadAllLines(userFile);
-            if (lines.Length == 2)
+            if (lines.Length == 3)
             {
                 string username = lines[0];
                 string password = lines[1];
-                loadedUsers.Add(new User(username, password));
+                UserRole role = Enum.Parse<UserRole>(lines[2]);
+                loadedUsers.Add(new User(username, password, role));
             }
         }
         return loadedUsers;

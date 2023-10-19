@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
+using System;
 using System.Collections.Generic;
 using WebShop3;
 
@@ -16,13 +15,7 @@ string username = Console.ReadLine();
 Console.WriteLine("Enter password: ");
 string password = Console.ReadLine();
 
-if (loginSystem.Register(username, password))
+if (loginSystem.Register(username, password, UserRole.User))
 {
     Console.WriteLine("You are now a registered user");
 }
-
-=======
-﻿using System.Diagnostics;
-using WebShop3;
-
->>>>>>> main
