@@ -41,7 +41,8 @@ namespace WebShop3
         }
         public void ReadProduct()
         {
-            string name;
+            Console.WriteLine("Product list: ");
+            //Console.WriteLine($"{p}")
         }
         public void UpdateProduct()
         {
@@ -71,8 +72,13 @@ namespace WebShop3
 
             for (int i = 0; i < productFile.Length; i++)
             {
-
+                Console.WriteLine($"{i}. {productFile[i]}");
             }
+
+            Console.WriteLine("Select index of product you wish to delete: ");
+
+
+
         }
     }
 }
