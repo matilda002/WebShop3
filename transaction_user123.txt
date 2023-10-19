@@ -1,0 +1,8 @@
+Bought products: 
+x, 1 kr
+y, 3 kr
+z, 5 kr
+
+The total sum is: 9 kr.
+
+Time of purchase: 2023-10-06 11:36:52.
