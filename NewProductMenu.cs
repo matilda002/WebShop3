@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using Microsoft.Win32.SafeHandles;
+using System.Linq.Expressions;
+using System.Security.Cryptography;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WebShop3;
@@ -33,8 +35,17 @@ public class NewProductMenu
             Console.WriteLine(line);
         }
 
-        Console.Write("Edit the username: ");
-        string? _newUsername = Console.ReadLine();
+        bool _differentUsername = false;
+        string? _newUsername = string.Empty;
+        while (!_differentUsername)
+        {
+            Console.Write("Edit the username: ");
+            _newUsername = Console.ReadLine()?.ToLower();
+            if (_newUsername != name)
+            {
+                _differentUsername = true;
+            }
+        }
 
         Console.Write("Enter the new password: ");
         string? _newPassword = Console.ReadLine();
@@ -57,5 +68,11 @@ public class NewProductMenu
         } while (!validInput);
 
         Console.WriteLine("Password changed!");
+        List<string> userUpdate = new List<string>()
+        {
+            _newUsername,
+            _newPassword,
+        };
+        File.WriteAllLines($"../../../Users/{name}.txt", userUpdate);
     }
 }
