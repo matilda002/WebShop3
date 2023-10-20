@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+//<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using WebShop3;
