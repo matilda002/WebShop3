@@ -30,8 +30,15 @@ if (loginSystem.Login(username, password))
 
         User user = new User(username, password);
 
-        Transaction transaction = new Transaction();
+        List<Product> products = new List<Product>();
+        for (int i = 0; i < 55; i++)
+        {
+            products.Add(new Product(i.ToString(), i));
+        }
+
+        Transaction transaction = new Transaction(user.UserName, products);
         user.SaveTransaction(transaction);
+        user.DisplayTransaction(transaction);
     }
 }
 
