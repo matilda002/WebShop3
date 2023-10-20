@@ -8,7 +8,7 @@
     ///     The data is not represented by a dictionary due to user might buy
     ///     multiple articles of the same type, which a dictionary cannot handle.
     /// </param>
-    public record Transaction(List<Product> BoughtProducts, DateTime TimeOfPurchase)
+    public record Transaction(string userName, List<Product> BoughtProducts, DateTime TimeOfPurchase)
     {
         private int GetAmountOfMoneySpent()
         {
@@ -34,6 +34,20 @@
             return boughtProductformated;
         }
 
+        public DateTime GetDateTime(string userName)
+        {
+            DateTime dateTime = DateTime.Now;
+
+            string[] rawContentOfFile = File.ReadAllLines($"transaction_{userName}.txt");
+
+            foreach (string line in rawContentOfFile)
+            {
+                string[] separaretedContentOfFile = line.Split("purchase: ");
+                dateTime = DateTime.Parse(separaretedContentOfFile[1]);
+            }
+            return dateTime;
+        }
+
         public override string ToString()
         {
             string transactionDataFormated = GetBoughtProductsFormated() +
@@ -41,7 +55,7 @@
                                                                    GetAmountOfMoneySpent() +
                                                                    " kr." +
                                                                    "\n\nTime of purchase: " +
-                                                                   TimeOfPurchase +
+                                                                   GetDateTime(userName) +
                                                                    ".";
             return transactionDataFormated;
         }

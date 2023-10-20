@@ -13,13 +13,14 @@ public class User
         Role = role;
     }
 
-    public void DisplayTransaction()
+    public void DisplayTransaction(Transaction transaction)
     {
-
+        Console.WriteLine(transaction.ToString());
     }
 
-    public void SaveTransaction(string filePath, Transaction transaction)
+    public void SaveTransaction(Transaction transaction)
     {
+        string filePath = $"transaction_{UserName}.txt";
         File.AppendAllText(filePath, transaction.ToString());
     }
 }
