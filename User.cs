@@ -11,7 +11,16 @@ public class User
         UserName = userName;
         PassWord = passWord;
         Role = role;
+    }
 
+    public void DisplayTransaction()
+    {
+
+    }
+
+    public void SaveTransaction(string filePath, Transaction transaction)
+    {
+        File.AppendAllText(filePath, transaction.ToString());
     }
 }
 

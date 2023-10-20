@@ -27,6 +27,11 @@ if (loginSystem.Login(username, password))
     else
     {
         //user specific actions   
+
+        User user = new User(username, password);
+
+        Transaction transaction = new Transaction();
+        user.SaveTransaction(transaction);
     }
 }
 
