@@ -12,6 +12,7 @@ public class EditUser
         do
         {
             Console.Clear();
+            Console.WriteLine("----- Edit User -----");
             Console.Write("Enter a username: ");
             username = Console.ReadLine();
             // program searching for a file with the same name
@@ -33,6 +34,7 @@ public class EditUser
         {
             // Printing out username + password 
             Console.Clear();
+            Console.WriteLine("----- Edit User -----");
             string[] _userFile = File.ReadAllLines($"../../../Users/{username}.txt");
             foreach (string line in _userFile)
             {
@@ -61,10 +63,11 @@ public class EditUser
 
         // Program checking that the new password is at least 8 characters long
         string? _newPassword = string.Empty;
-        while (_newPassword?.Length <= 7) // 7 instead of 8 because index start at 0
+        while (_newPassword?.Length <= 4) // 4 instead of 5 because index start at 0
         {
             Console.Clear();
-            Console.Write("Enter the new password (minimum 8 characters): ");
+            Console.WriteLine("----- Edit User -----");
+            Console.Write("Enter the new password (minimum 5 characters): ");
             _newPassword = Console.ReadLine();
         }
 
@@ -82,6 +85,7 @@ public class EditUser
                     break;
                 case (true):
                     Console.Clear();
+                    Console.WriteLine("----- Edit User -----");
                     Console.WriteLine("Password changed!");
                     _validInput = true;
                     break;
