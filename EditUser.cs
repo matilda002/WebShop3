@@ -4,7 +4,7 @@
 // To put in Admin() later
 public class EditUser
 {
-    public string? username = string.Empty;
+    private string? _username = string.Empty;
     public void EditUserMenu()
     {
         // Loops until there is a matching username
@@ -14,9 +14,9 @@ public class EditUser
             Console.Clear();
             Console.WriteLine("----- Edit User -----");
             Console.Write("Enter a username: ");
-            username = Console.ReadLine();
+            _username = Console.ReadLine();
             // program searching for a file with the same name
-            switch (File.Exists($"../../../Users/{username}.txt"))
+            switch (File.Exists($"../../../Users/{_username}.txt"))
             {
                 case (true):
                     OpenUser();
@@ -29,13 +29,13 @@ public class EditUser
     {        
         // Loops until the new username includes 3 characters, and doesn't already exist in the Users folder
         string? _newUsername = string.Empty;
-        bool validUsername = false;
-        while (!validUsername)
+        bool _validUsername = false;
+        while (!_validUsername)
         {
             // Printing out username + password 
             Console.Clear();
             Console.WriteLine("----- Edit User -----");
-            string[] _userFile = File.ReadAllLines($"../../../Users/{username}.txt");
+            string[] _userFile = File.ReadAllLines($"../../../Users/{_username}.txt");
             foreach (string line in _userFile)
             {
                 Console.WriteLine(line);
@@ -47,7 +47,7 @@ public class EditUser
             if (!File.Exists($"../../../Users/{_newUsername}.txt") && _newUsername?.Length > 3)
             {
                 Console.WriteLine("Username successfully changed to " + _newUsername);
-                validUsername = true;
+                _validUsername = true;
             }
             else if (_newUsername?.Length < 3)
             {
@@ -96,15 +96,15 @@ public class EditUser
         } while (!_validInput);
 
         // Making a list to add to the user.txt file later
-        List<string> userUpdate = new List<string>()
+        List<string> _userUpdate = new List<string>()
         {
             _newUsername,
             _newPassword,
         };
 
         // Replacing the old file with the new one
-        File.WriteAllLines($"../../../Users/{_newUsername}.txt", userUpdate);
-        File.WriteAllLines($"../../../Users/{username}.txt", userUpdate);
-        File.Replace($"../../../Users/{username}.txt", $"../../../Users/{_newUsername}.txt", null); 
+        File.WriteAllLines($"../../../Users/{_newUsername}.txt", _userUpdate);
+        File.WriteAllLines($"../../../Users/{_username}.txt", _userUpdate);
+        File.Replace($"../../../Users/{_username}.txt", $"../../../Users/{_newUsername}.txt", null); 
     }
 }
