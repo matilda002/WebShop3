@@ -1,4 +1,6 @@
-﻿namespace WebShop3;
+﻿using System.Linq.Expressions;
+
+namespace WebShop3;
 
 
 // To put in Admin() later
@@ -12,7 +14,7 @@ public class EditUser
         do
         {
             Console.Clear();
-            Console.WriteLine("----- Edit User -----");
+            Console.WriteLine("----- Edit User -----\n");
             Console.Write("Enter a username: ");
             _username = Console.ReadLine();
             // program searching for a file with the same name
@@ -32,7 +34,7 @@ public class EditUser
         bool _validUsername = false;
         while (!_validUsername)
         {
-            // Printing out username + password 
+            // Printing out username + password + role 
             Console.Clear();
             Console.WriteLine("----- Edit User -----");
             string[] _userFile = File.ReadAllLines($"../../../Users/{_username}.txt");
@@ -40,34 +42,39 @@ public class EditUser
             {
                 Console.WriteLine(line);
             }
+            Console.WriteLine();
 
-            Console.Write("Enter a new username (minimum 3 characters): ");
+            // User insert a new password
+            Console.Write("Enter a new username (min. 3 characters): ");
             _newUsername = Console.ReadLine()?.ToLower();
             // Program checking that the new username doesn't already exist
-            if (!File.Exists($"../../../Users/{_newUsername}.txt") && _newUsername?.Length > 3)
+            switch (File.Exists($"../../../Users/{_newUsername}.txt") && _newUsername?.Length > 2)
             {
-                Console.WriteLine("Username successfully changed to " + _newUsername);
-                _validUsername = true;
+                case true:
+                    Console.WriteLine("Username successfully changed to " + _newUsername);
+                    _validUsername = true; break;
+                case false:
+                    switch (_newUsername?.Length < 3)
+                    {
+                        case false:
+                            Console.WriteLine("Username already exists!");
+                            break;s
+                        case true:
+                            Console.WriteLine("The username must include a min. 3 characters!");
+                            break;
+                    }
+                    Console.ReadKey();
+                    break;   
             }
-            else if (_newUsername?.Length < 3)
-            {
-                Console.WriteLine("The username need to include a minimum 3 characters!");
-            }
-            else 
-            {
-                Console.WriteLine("Username already exists!"); 
-            }
-            Console.WriteLine("\n\nPress ENTER to continue!");
-            Console.ReadKey();
         }
 
-        // Program checking that the new password is at least 8 characters long
+        // Program checking that the new password is at least 5 characters long
         string? _newPassword = string.Empty;
         while (_newPassword?.Length <= 4) // 4 instead of 5 because index start at 0
         {
             Console.Clear();
-            Console.WriteLine("----- Edit User -----");
-            Console.Write("Enter the new password (minimum 5 characters): ");
+            Console.WriteLine("----- Edit User -----\n");
+            Console.Write("Enter the new password (min. 5 characters): ");
             _newPassword = Console.ReadLine();
         }
 
@@ -75,9 +82,11 @@ public class EditUser
         bool _validInput = false;
         do
         {
+            // Input for repeated password
             Console.Write("Repeat the new password: ");
             string? _pRepeat = Console.ReadLine();
 
+            // When the repeated password match, they come back to menu
             switch (_newPassword == _pRepeat)
             {
                 case (false):
@@ -85,7 +94,7 @@ public class EditUser
                     break;
                 case (true):
                     Console.Clear();
-                    Console.WriteLine("----- Edit User -----");
+                    Console.WriteLine("----- Edit User -----\n");
                     Console.WriteLine("Password changed!");
                     _validInput = true;
                     break;
@@ -95,16 +104,13 @@ public class EditUser
 
         } while (!_validInput);
 
-        // Making a list to add to the user.txt file later
-        List<string> _userUpdate = new List<string>()
-        {
-            _newUsername,
-            _newPassword,
-        };
-
+        // Variables to the userfiles for easier identefing string of code
+        string _newUserFilepath = $"../../../Users/{_newUsername}.txt";
+        string _oldUserFilepath = $"../../../Users/{_username}.txt"; // original file
+        // Writing over the old login information with the new
+        File.WriteAllText(_newUserFilepath, $"{ _newUsername}\n{ _newPassword}\n{UserRole.User}");
+        File.WriteAllText(_oldUserFilepath, $"{_newUsername}\n{_newPassword}\n{UserRole.User}");
         // Replacing the old file with the new one
-        File.WriteAllLines($"../../../Users/{_newUsername}.txt", _userUpdate);
-        File.WriteAllLines($"../../../Users/{_username}.txt", _userUpdate);
-        File.Replace($"../../../Users/{_username}.txt", $"../../../Users/{_newUsername}.txt", null); 
+        File.Replace(_oldUserFilepath, _newUserFilepath, null); 
     }
 }
