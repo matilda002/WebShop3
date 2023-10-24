@@ -26,6 +26,8 @@ if (loginSystem.Login(username, password))
     }
     else
     {
+        Store store = new Store();
+        
         //user specific actions   
     }
 }

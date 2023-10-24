@@ -58,7 +58,7 @@ public class EditUser
                     {
                         case false:
                             Console.WriteLine("Username already exists!");
-                            break;s
+                            break;
                         case true:
                             Console.WriteLine("The username must include a min. 3 characters!");
                             break;
