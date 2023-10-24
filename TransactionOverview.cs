@@ -14,7 +14,7 @@ public class TransactionOverview
             Console.Write("Enter a username: ");
             username = Console.ReadLine();
             // program searching for a file with the same name
-            switch (File.Exists($"../../../transaction_{username}"))
+            switch (File.Exists($"../../../transactions/transaction_{username}"))
             {
                 case (true):
                     OpenTransaction();
@@ -24,7 +24,8 @@ public class TransactionOverview
     }
     private void OpenTransaction()
     {
-        string[] _transactionFile = File.ReadAllLines($"../../../transaction_{username}");
+        Console.Clear();
+        string[] _transactionFile = File.ReadAllLines($"../../../transactions/transaction_{username}");
         foreach (string line in _transactionFile)
         {
             Console.WriteLine(line);
