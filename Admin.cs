@@ -12,7 +12,7 @@
 
         public void CreateProduct()
         { 
-            string[] productFile = File.ReadAllLines("products.csv");
+            string[] productFile = File.ReadAllLines("../../../products.csv");
             Console.WriteLine("Create new product");
             Console.WriteLine("Product name: ");
             string name = Console.ReadLine();
@@ -31,7 +31,7 @@
             Console.WriteLine("Product is now created");
             
             string price = Console.ReadLine();
-            File.AppendAllText("products.csv", $"{name},{price}");
+            File.AppendAllText("../../../products.csv", $"{name},{price}");
         }
         public void ReadProduct()
         {
@@ -40,7 +40,7 @@
         }
         public void UpdateProduct()
         {
-            string[] productFile = File.ReadAllLines("products.csv");
+            string[] productFile = File.ReadAllLines("../../../products.csv");
            
             for (int i = 0; i < productFile.Length; i++)
             {
@@ -58,11 +58,11 @@
             Console.WriteLine("Product is now created");
             string price = Console.ReadLine();
             productFile[index] = $"{name},{price}";
-            File.WriteAllLines("products.csv", productFile);
+            File.WriteAllLines("../../../products.csv", productFile);
         }
         public void DeleteProduct()
         {
-            string[] productFile = File.ReadAllLines("products.cvs");
+            string[] productFile = File.ReadAllLines("../../../products.csv");
 
             for (int i = 0; i < productFile.Length; i++)
             {

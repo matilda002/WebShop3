@@ -1,9 +1,9 @@
 using WebShop3;
 
 // creates the file for products
-if (!File.Exists("products.csv")) // ändra till "../../../products.csv"
+if (!File.Exists("../../../products.csv")) // ändra till "../../../products.csv"
 {
-    File.Create("products.csv").Close();
+    File.Create("../../../products.csv").Close();
 }
 
 ILoginSystem loginSystem = new LogIn();
@@ -67,7 +67,7 @@ void AdminMenu()
         Console.WriteLine("------- Admin Menu -------\n"+
                           "1. Transaction overview\n" +
                           "2. Product overview\n"+
-                          "3. Edit user" +
+                          "3. Edit user\n" +
                           "\n4. Quit");
         Console.Write("\nWrite your menuchoice:  ");
         int.TryParse(Console.ReadLine(), out int successful); // make sure the input is a number and included in the list
