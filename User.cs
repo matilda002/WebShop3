@@ -29,7 +29,7 @@ public class User
         PassWord = passWord;
 
         Transaction _transaction = new Transaction(_boughtProducts);
-        filePath = $"../../../transaction_{UserName}";
+        filePath = $"../../../transactions/transaction_{UserName}";
 
         SaveTransactionData(_transaction);
         DisplayTransactionData();
