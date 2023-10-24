@@ -16,12 +16,7 @@ public class User
 
     private string filePath;
 
-    List<Product> _boughtProducts = new List<Product>
-{
-    new Product("a", 12),
-    new Product("h", 352),
-    new Product("u", 52),
-};
+    List<Product> _boughtProducts = new List<Product>();
 
     public User(string userName, string passWord)
     {
