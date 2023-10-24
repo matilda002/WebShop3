@@ -7,9 +7,9 @@ public class User
     public UserRole Role { get; set; }
 
 
-    private string filePath;
+    // private string filePath;
 
-    List<Product> _boughtProducts = new List<Product>();
+    // List<Product> _boughtProducts = new List<Product>();
 
     public User(string userName, string passWord, UserRole role = UserRole.User)
     {
@@ -17,13 +17,13 @@ public class User
         UserName = userName;
         PassWord = passWord;
         Role = role;
-        Transaction _transaction = new Transaction(_boughtProducts);
-        filePath = $"../../../transactions/transaction_{UserName}";
+        // Transaction _transaction = new Transaction(_boughtProducts);
+        // filePath = $"../../../transactions/transaction_{UserName}";
 
-        SaveTransactionData(_transaction);
-        DisplayTransactionData();
+        // SaveTransactionData(_transaction);
+        // DisplayTransactionData();
     }
-
+    /*
     void DisplayTransactionData()
     {
         string[] contentOfFile = File.ReadAllLines(filePath);
@@ -44,4 +44,5 @@ public class User
     {
         File.AppendAllText(filePath, transaction.ToString());
     }
+    */
 }
