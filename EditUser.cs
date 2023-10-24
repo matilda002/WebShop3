@@ -1,9 +1,6 @@
-﻿using System.Linq.Expressions;
-
-namespace WebShop3;
+﻿namespace WebShop3;
 
 
-// To put in Admin() later
 public class EditUser
 {
     private string? _username = string.Empty;
@@ -22,8 +19,7 @@ public class EditUser
             {
                 case (true):
                     OpenUser();
-                    valid = true;
-                    break;
+                    valid = true; break;
             }
         } while (!valid);
     }
@@ -58,7 +54,7 @@ public class EditUser
                     {
                         case false:
                             Console.WriteLine("Username already exists!");
-                            break;s
+                            break;
                         case true:
                             Console.WriteLine("The username must include a min. 3 characters!");
                             break;
