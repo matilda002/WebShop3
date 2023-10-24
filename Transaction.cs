@@ -8,8 +8,9 @@
     ///     The data is not represented by a dictionary due to user might buy
     ///     multiple articles of the same type, which a dictionary cannot handle.
     /// </param>
-    public record Transaction(List<Product> BoughtProducts, DateTime TimeOfPurchase)
+    public record Transaction(List<Product> BoughtProducts)
     {
+        DateTime TimeOfPurchase = DateTime.Now;
         private int GetAmountOfMoneySpent()
         {
             int amountOfMoneySpent = 0;
@@ -22,7 +23,7 @@
 
         private string GetBoughtProductsFormated()
         {
-            string boughtProductformated = "Bought products: \n";
+            string boughtProductformated = "\nBought products: \n";
             foreach (Product boughtProduct in BoughtProducts)
             {
                 boughtProductformated += boughtProduct.Name +
