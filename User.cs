@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-
-namespace WebShop3;
+﻿namespace WebShop3;
 
 public class User
 {
     public string UserName { get; set; }
     public string PassWord { get; set; }
+    public UserRole Role { get; set; }
+
 
     private string filePath;
 
     List<Product> _boughtProducts = new List<Product>();
 
-    public User(string userName, string passWord)
+    public User(string userName, string passWord, UserRole role = UserRole.User)
     {
+
         UserName = userName;
         PassWord = passWord;
-
+        Role = role;
         Transaction _transaction = new Transaction(_boughtProducts);
         filePath = $"../../../transactions/transaction_{UserName}";
 
@@ -30,7 +24,7 @@ public class User
         DisplayTransactionData();
     }
 
-    public void DisplayTransactionData()
+    void DisplayTransactionData()
     {
         string[] contentOfFile = File.ReadAllLines(filePath);
 
@@ -46,7 +40,7 @@ public class User
     }
 
     // Transaction
-    public void SaveTransactionData(Transaction transaction)
+    void SaveTransactionData(Transaction transaction)
     {
         File.AppendAllText(filePath, transaction.ToString());
     }
