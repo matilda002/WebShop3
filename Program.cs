@@ -35,7 +35,7 @@ if (loginSystem.Login(username, password))
     }
     else
     {
-        UserMenu();   
+        Store store = new Store();
     }
 }
 
@@ -75,51 +75,18 @@ void AdminMenu()
         switch (successful) // transfered to 
         {
             case 1:
-                TransactionOverview to = new TransactionOverview();
-                to.UserTransaction();
+                TransactionOverview transaction = new TransactionOverview();
+                transaction.UserTransaction();
                 validChoice = true; break;
             case 2:
-                ProductMenu pm = new ProductMenu();
-                pm.StockMenu();
+                ProductMenu product = new ProductMenu();
+                product.StockMenu();
                 validChoice = true; break;
             case 3:
-                EditUser eu = new EditUser();
-                eu.EditUserMenu();
+                EditUser user = new EditUser();
+                user.EditUserMenu();
                 validChoice = true; break;
             case 4:
-                Console.WriteLine("You have chosen to quit!\n\nPress 'ENTER' to continue!"); // quit program
-                Console.ReadKey();
-                return;
-            default:
-                Console.WriteLine("Not a valid menuchoice!\n\nPress 'ENTER' to continue!");
-                Console.ReadKey();
-                break;
-        }
-    } while (!validChoice);
-}
-
-void UserMenu()
-{
-    bool validChoice = false;
-    do
-    {
-        Console.Clear();
-        Console.WriteLine("------- Costumer Menu -------\n" +
-                          "1. Store\n" +
-                          "2. See your orderhistory" +
-                          "\n3. Quit");
-        Console.Write("\nWrite your menuchoice:  ");
-        int.TryParse(Console.ReadLine(), out int successful); // make sure the input is a number and included in the list
-
-        switch (successful)
-        {
-            case 1:
-                Store store = new Store();
-                validChoice = true; break;
-            case 2:
-                // user.DisplayTransaction
-                validChoice = true; break;
-            case 3:
                 Console.WriteLine("You have chosen to quit!\n\nPress 'ENTER' to continue!"); // quit program
                 Console.ReadKey();
                 return;
