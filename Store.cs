@@ -84,7 +84,6 @@ namespace WebShop3
             NumericalDialogueAnswer dialogueAnswer;
 
             int index = 0;
-            Console.WriteLine(GetHelpText());
             do
             {
                 int indexOffset = 1;
