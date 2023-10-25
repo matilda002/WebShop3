@@ -19,9 +19,6 @@ while (username?.Length == 0) // making sure input isn't empty
     username = Console.ReadLine()?.ToLower();
 }
 
-
-
-
 string? password = string.Empty;
 while (password?.Length == 0) // making sure input isn't empty
 {
@@ -137,4 +134,3 @@ void UserMenu()
         }
     } while (!quit);
 }
-
