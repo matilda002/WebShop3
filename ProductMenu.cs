@@ -11,10 +11,10 @@ public class ProductMenu : Admin
         {
             Console.Clear();
             Console.WriteLine("--------- Product Overview ---------\n" +
-                              "1. Create a new product\n" +
+                              "1. Create new product\n" +
                               "2. Print out list of products\n" +
-                              "3. Update a product\n" +
-                              "4. Delete a product\n\n" +
+                              "3. Update product\n" +
+                              "4. Delete product\n\n" +
                               "5. Return to 'Admin menu'");
             Console.Write("\nWrite your menuchoice:  ");
             int.TryParse(Console.ReadLine(), out int successful);
