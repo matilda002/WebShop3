@@ -2,12 +2,6 @@
 {
     public class Admin
     {
-        //Skapa CRUD för admin
-        //Kunna se vilka köp görs
-        //custommer history
-
-        //Skapa ny produkt med namn och pris
-
         public void ShowAllPurchases()
         {
 
@@ -41,7 +35,7 @@
             Console.ReadKey();
 
             // Lägger till den nya produkten (namn och pris) i filen "products.csv".
-            File.AppendAllText("../../../products.csv", $"{name},{price}" + Environment.NewLine);
+            File.AppendAllText("../../../products.csv", $"{name}, {price}" + Environment.NewLine);
         }
         public void ReadProduct()
         {
@@ -93,7 +87,7 @@
             Console.ReadKey();
 
             // Uppdaterar den valda produkten med den nya informationen och sparar ändringarna i filen "products.csv".
-            productFile[index] = $"{name},{price}";
+            productFile[index] = $"{name}, {price}";
             File.WriteAllLines("../../../products.csv", productFile);
         }
         public void DeleteProduct()
