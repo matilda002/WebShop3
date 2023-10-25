@@ -14,8 +14,12 @@
         }
 
         public void CreateProduct()
+<<<<<<< HEAD
         {
             // Läser befintlig produktdata från filen "products.csv" och lagrar den i en array.
+=======
+        { 
+>>>>>>> 47cc826759915c3c943f3b8b74d050d5d57a1eae
             string[] productFile = File.ReadAllLines("../../../products.csv");
             Console.WriteLine("Create new product");
             Console.WriteLine("Product name: ");
@@ -37,7 +41,11 @@
 
             // Lägger till den nya produkten (namn och pris) i filen "products.csv".
             string price = Console.ReadLine();
+<<<<<<< HEAD
             File.AppendAllText("../../../products.csv", $"{name},{price}" + Environment.NewLine);
+=======
+            File.AppendAllText("../../../products.csv", $"{name},{price}");
+>>>>>>> 47cc826759915c3c943f3b8b74d050d5d57a1eae
         }
         public void ReadProduct()
         {
@@ -54,10 +62,15 @@
         }
         public void UpdateProduct()
         {
+<<<<<<< HEAD
             // Läser produktdata från filen "products.csv" och visar den tillsammans med ett index för varje produkt.
             string[] productFile = File.ReadAllLines("../../../products.csv");
 
             // Visar en lista över produkter med deras index i konsolen.
+=======
+            string[] productFile = File.ReadAllLines("../../../products.csv");
+           
+>>>>>>> 47cc826759915c3c943f3b8b74d050d5d57a1eae
             for (int i = 0; i < productFile.Length; i++)
             {
                 Console.WriteLine($"{i}. {productFile[i]}");
@@ -83,9 +96,13 @@
         }
         public void DeleteProduct()
         {
+<<<<<<< HEAD
             // Läser produktdata från filen "products.csv" och lagrar den i en lista.
             //string[] productFile = File.ReadAllLines("products.cvs");
             List<string> productFile = File.ReadAllLines("../../../products.csv").ToList();
+=======
+            string[] productFile = File.ReadAllLines("../../../products.csv");
+>>>>>>> 47cc826759915c3c943f3b8b74d050d5d57a1eae
 
             // Kontrollerar om det finns produkter i listan och informerar användaren om att det inte finns några produkter att ta bort om så är fallet.
             if (productFile.Count == 0)

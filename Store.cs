@@ -210,7 +210,7 @@ namespace WebShop3
             for (int index = 0; index < productsToShow.Count; index++)
             {
                 Product product = productsToShow[index];
-                string productInformation = $"{index} : {product}";
+                string productInformation = $"{index} : {product.Name}";
                 Console.WriteLine(productInformation);
             }
         }
