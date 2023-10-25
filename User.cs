@@ -7,9 +7,9 @@ public class User
     public UserRole Role { get; set; }
 
 
-    // private string filePath;
+    private string filePath;
 
-    // List<Product> _boughtProducts = new List<Product>();
+    public List<Product> BoughtProducts = new List<Product>();
 
     public User(string userName, string passWord, UserRole role = UserRole.User)
     {
@@ -17,14 +17,26 @@ public class User
         UserName = userName;
         PassWord = passWord;
         Role = role;
-        // Transaction _transaction = new Transaction(_boughtProducts);
-        // filePath = $"../../../transactions/transaction_{UserName}";
 
-        // SaveTransactionData(_transaction);
-        // DisplayTransactionData();
+        filePath = $"../../../transactions/transaction_{UserName}";
     }
-    /*
-    void DisplayTransactionData()
+
+    public void GetProductsFromFile()
+    {
+        string[] contentOfFile = File.ReadAllLines("../../../");
+
+        foreach (string line in contentOfFile)
+        {
+            string[] info = line.Split(", ");
+
+            Product product = new Product(contentOfFile[0], int.Parse(contentOfFile[1]));
+            BoughtProducts.Add(product);
+            Transaction transaction = new Transaction(UserName, BoughtProducts);
+            Console.WriteLine(transaction.ToString());
+        }
+    }
+
+    public void DisplayTransactionData()
     {
         string[] contentOfFile = File.ReadAllLines(filePath);
 
@@ -33,16 +45,15 @@ public class User
             string[] info = line.Split(", ");
 
             Product product = new Product(contentOfFile[0], int.Parse(contentOfFile[1]));
-            _boughtProducts.Add(product);
-            Transaction transaction = new Transaction(_boughtProducts);
+            BoughtProducts.Add(product);
+            Transaction transaction = new Transaction(UserName, BoughtProducts);
             Console.WriteLine(transaction.ToString());
         }
     }
 
     // Transaction
-    void SaveTransactionData(Transaction transaction)
+    public void SaveTransactionData(Transaction transaction)
     {
         File.AppendAllText(filePath, transaction.ToString());
     }
-    */
 }

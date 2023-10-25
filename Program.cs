@@ -75,8 +75,10 @@ void AdminMenu()
         switch (successful) // transfered to 
         {
             case 1:
-                TransactionOverview transaction = new TransactionOverview();
-                transaction.UserTransaction();
+                //TransactionOverview transaction = new TransactionOverview();
+                //transaction.UserTransaction();
+                User transactionUser = new User(username, password);
+                transactionUser.DisplayTransactionData();
                 validChoice = true; break;
             case 2:
                 ProductMenu product = new ProductMenu();
