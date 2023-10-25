@@ -1,10 +1,12 @@
-﻿namespace WebShop3;
+﻿using System.Net.Quic;
+
+namespace WebShop3;
 
 public class ProductMenu : Admin
 {
     public void StockMenu()
     {
-        bool forward = false;
+        bool quit = false;
         do
         {
             Console.Clear();
@@ -13,7 +15,7 @@ public class ProductMenu : Admin
                               "2. Print out list of products\n" +
                               "3. Update a product\n" +
                               "4. Delete a product\n\n" +
-                              "5. Quit");
+                              "5. Return to 'Admin menu'");
             Console.Write("\nWrite your menuchoice:  ");
             int.TryParse(Console.ReadLine(), out int successful);
 
@@ -32,15 +34,15 @@ public class ProductMenu : Admin
                     DeleteProduct();
                     break;
                 case 5:
-                    Console.WriteLine("You have chosen to quit!\n\nPress 'ENTER' to continue!"); // quit program
+                    Console.WriteLine("You have chosen to return to 'Admin menu'!\n\nPress 'ENTER' to continue!"); // quit program
                     Console.ReadKey();
-                    forward = true;  break;
+                    quit = true;  break;
                 default:
                     Console.WriteLine("Not a valid menuchoice!\n\nPress 'ENTER' to continue!");
                     Console.ReadKey();
                     break;
             }
         }
-        while (!forward);
+        while (!quit);
     }
 }
