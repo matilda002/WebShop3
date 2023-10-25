@@ -51,12 +51,12 @@ public class EditUser
             }
             else if (_newUsername?.Length < 3)
             {
-                Console.WriteLine("Username already exists!\n\nPress ENTER to continue!");
+                Console.WriteLine("The username must include a min. 3 characters!\n\nPress ENTER to continue!");
                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("The username must include a min. 3 characters!\n\nPress ENTER to continue!");
+                Console.WriteLine("Username already exists!\n\nPress ENTER to continue!");
                 Console.ReadKey();
             }
         }
