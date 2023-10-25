@@ -228,6 +228,7 @@ namespace WebShop3
             Console.Write(storeMenuText);
         }
 
+
         private void DisplayStore()
         {
             bool isMenuRunning = true;
