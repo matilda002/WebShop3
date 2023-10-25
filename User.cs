@@ -21,21 +21,6 @@ public class User
         filePath = $"../../../transactions/transaction_{UserName}";
     }
 
-    public void GetProductsFromFile()
-    {
-        string[] contentOfFile = File.ReadAllLines("../../../");
-
-        foreach (string line in contentOfFile)
-        {
-            string[] info = line.Split(", ");
-
-            Product product = new Product(contentOfFile[0], int.Parse(contentOfFile[1]));
-            BoughtProducts.Add(product);
-            Transaction transaction = new Transaction(UserName, BoughtProducts);
-            Console.WriteLine(transaction.ToString());
-        }
-    }
-
     public void DisplayTransactionData()
     {
         string[] contentOfFile = File.ReadAllLines(filePath);
