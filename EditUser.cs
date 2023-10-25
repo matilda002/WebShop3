@@ -1,9 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿namespace WebShop3;
 
-namespace WebShop3;
-
-
-// To put in Admin() later
 public class EditUser
 {
     private string? _username = string.Empty;

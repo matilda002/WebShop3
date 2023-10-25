@@ -2,12 +2,6 @@
 {
     public class Admin
     {
-        //Skapa CRUD för admin
-        //Kunna se vilka köp görs
-        //custommer history
-
-        //Skapa ny produkt med namn och pris
-
         public void ShowAllPurchases()
         {
 
@@ -15,11 +9,12 @@
 
         public void CreateProduct()
         {
+            Console.Clear();
             // Läser befintlig produktdata från filen "products.csv" och lagrar den i en array.
             string[] productFile = File.ReadAllLines("../../../products.csv");
             Console.WriteLine("Create new product");
             Console.WriteLine("Product name: ");
-            string name = Console.ReadLine();
+            string? name = Console.ReadLine();
 
             // Kontrollerar om det angivna produktnamnet redan finns i produktkatalogen.
             foreach (string product in productFile)
@@ -33,14 +28,18 @@
 
             // Ber användaren att ange priset på den nya produkten.
             Console.WriteLine("Product Price: ");
-            Console.WriteLine("Product is now created");
+            string? price = Console.ReadLine();
+
+            // Ser till att programmet inte återvänder för snabbt
+            Console.WriteLine("Product is now created!\n\nPress 'ENTER' to return to 'Product Overview'");
+            Console.ReadKey();
 
             // Lägger till den nya produkten (namn och pris) i filen "products.csv".
-            string price = Console.ReadLine();
-            File.AppendAllText("../../../products.csv", $"{name},{price}" + Environment.NewLine);
+            File.AppendAllText("../../../products.csv", $"{name}, {price}" + Environment.NewLine);
         }
         public void ReadProduct()
         {
+            Console.Clear();
             // Läser all produktdata från filen "products.csv" och lagrar den i en array.
             string[] products = File.ReadAllLines("../../../products.csv");
 
@@ -50,10 +49,14 @@
             {
                 Console.WriteLine(product);
             }
+            // Ser till att programmet inte återvänder för snabbt
+            Console.WriteLine("\n\nPress 'ENTER' to return to 'Product Overview'");
+            Console.ReadKey();
 
         }
         public void UpdateProduct()
         {
+            Console.Clear();
             // Läser produktdata från filen "products.csv" och visar den tillsammans med ett index för varje produkt.
             string[] productFile = File.ReadAllLines("../../../products.csv");
 
@@ -65,24 +68,31 @@
             Console.WriteLine("Select index of product you wish to update");
 
             // Ber användaren att välja index för produkten de vill uppdatera.
-            int index = int.Parse(Console.ReadLine());
+            int.TryParse(Console.ReadLine(), out int index);
+
+            Console.Clear();
 
             // Ber användaren att ange ett nytt namn och pris för den valda produkten.
             Console.WriteLine("Select new name for product");
             Console.WriteLine("Product name: ");
-            string name = Console.ReadLine();
+            string? name = Console.ReadLine();
 
 
             Console.WriteLine("Select new price for product: ");
+            string? price = Console.ReadLine();
             Console.WriteLine("Product is now created");
-            string price = Console.ReadLine();
+
+            // Ser till att programmet inte återvänder för snabbt
+            Console.WriteLine("\n\nPress 'ENTER' to return to 'Product Overview'");
+            Console.ReadKey();
 
             // Uppdaterar den valda produkten med den nya informationen och sparar ändringarna i filen "products.csv".
-            productFile[index] = $"{name},{price}";
+            productFile[index] = $"{name}, {price}";
             File.WriteAllLines("../../../products.csv", productFile);
         }
         public void DeleteProduct()
         {
+            Console.Clear();
             // Läser produktdata från filen "products.csv" och lagrar den i en lista.
             //string[] productFile = File.ReadAllLines("products.cvs");
             List<string> productFile = File.ReadAllLines("../../../products.csv").ToList();
@@ -90,7 +100,8 @@
             // Kontrollerar om det finns produkter i listan och informerar användaren om att det inte finns några produkter att ta bort om så är fallet.
             if (productFile.Count == 0)
             {
-                Console.WriteLine("No products to delete.");
+                Console.WriteLine("No products to delete.\n\nPress 'ENTER' to return to 'Product Overview'");
+                Console.ReadKey();
                 return;
             }
 
@@ -125,6 +136,9 @@
                 // Hanterar fallet där användaren anger ogiltigt index.
                 Console.WriteLine("Invalid index. Please select a valid index to delete a product.");
             }
+            // Ser till att programmet inte återvänder för snabbt
+            Console.WriteLine("\n\nPress 'ENTER' to continue!");
+            Console.ReadKey();
 
         }
     }

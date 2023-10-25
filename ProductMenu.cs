@@ -1,19 +1,21 @@
-﻿namespace WebShop3;
+﻿using System.Net.Quic;
+
+namespace WebShop3;
 
 public class ProductMenu : Admin
 {
     public void StockMenu()
     {
-        bool forward = false;
+        bool quit = false;
         do
         {
             Console.Clear();
             Console.WriteLine("--------- Product Overview ---------\n" +
-                              "1. Create a new product\n" +
+                              "1. Create new product\n" +
                               "2. Print out list of products\n" +
-                              "3. Update a product\n" +
-                              "4. Delete a product\n\n" +
-                              "5. Quit");
+                              "3. Update product\n" +
+                              "4. Delete product\n\n" +
+                              "5. Return to 'Admin menu'");
             Console.Write("\nWrite your menuchoice:  ");
             int.TryParse(Console.ReadLine(), out int successful);
 
@@ -21,26 +23,26 @@ public class ProductMenu : Admin
             {
                 case 1:
                     CreateProduct();
-                    forward = true; break;
+                    break;
                 case 2:
                     ReadProduct();
-                    forward = true; break;
+                    break;
                 case 3:
                     UpdateProduct();
-                    forward = true; break;
+                    break;
                 case 4:
                     DeleteProduct();
-                    forward = true; break;
+                    break;
                 case 5:
-                    Console.WriteLine("You have chosen to quit!\n\nPress 'ENTER' to continue!"); // quit program
+                    Console.WriteLine("You have chosen to return to 'Admin menu'!\n\nPress 'ENTER' to continue!"); // quit program
                     Console.ReadKey();
-                    return;
+                    quit = true;  break;
                 default:
                     Console.WriteLine("Not a valid menuchoice!\n\nPress 'ENTER' to continue!");
                     Console.ReadKey();
                     break;
             }
         }
-        while (!forward);
+        while (!quit);
     }
 }

@@ -19,9 +19,6 @@ while (username?.Length == 0) // making sure input isn't empty
     username = Console.ReadLine()?.ToLower();
 }
 
-
-
-
 string? password = string.Empty;
 while (password?.Length == 0) // making sure input isn't empty
 {
@@ -66,7 +63,7 @@ static UserRole GetRole(string username)
 
 void AdminMenu()
 {
-    bool validChoice = false;
+    bool quit = false;
     do
     {
         Console.Clear();
@@ -78,37 +75,35 @@ void AdminMenu()
         Console.Write("\nWrite your menuchoice:  ");
         int.TryParse(Console.ReadLine(), out int successful); // make sure the input is a number and included in the list
 
-        switch (successful) // transfered to 
+        switch (successful) // transfered to each menuchoice
         {
             case 1:
-                //TransactionOverview transaction = new TransactionOverview();
-                //transaction.UserTransaction();
-                User transactionUser = new User(username, password);
-                transactionUser.DisplayTransactionData();
-                validChoice = true; break;
+                TransactionOverview transaction = new TransactionOverview();
+                transaction.UserTransaction();
+                break;
             case 2:
                 ProductMenu product = new ProductMenu();
                 product.StockMenu();
-                validChoice = true; break;
+                break;
             case 3:
                 EditUser user = new EditUser();
                 user.EditUserMenu();
-                validChoice = true; break;
+                break;
             case 4:
                 Console.WriteLine("You have chosen to quit!\n\nPress 'ENTER' to continue!"); // quit program
                 Console.ReadKey();
-                return;
+                quit = true; break;
             default:
                 Console.WriteLine("Not a valid menuchoice!\n\nPress 'ENTER' to continue!");
                 Console.ReadKey();
                 break;
         }
-    } while (!validChoice);
+    } while (!quit);
 }
 
 void UserMenu()
 {
-    bool validChoice = false;
+    bool quit = false;
     do
     {
         Console.Clear();
@@ -123,19 +118,19 @@ void UserMenu()
         {
             case 1:
                 Store store = new Store();
-                validChoice = true; break;
+                break;
             case 2:
-                // User.DisplayTransaction
-                validChoice = true; break;
+                User transactionUser = new User(username, password);
+                transactionUser.DisplayTransactionData();
+                break;
             case 3:
                 Console.WriteLine("You have chosen to quit!\n\nPress 'ENTER' to continue!"); // quit program
                 Console.ReadKey();
-                return;
+                quit = true; break; ;
             default:
                 Console.WriteLine("Not a valid menuchoice!\n\nPress 'ENTER' to continue!");
                 Console.ReadKey();
                 break;
         }
-    } while (!validChoice);
+    } while (!quit);
 }
-
