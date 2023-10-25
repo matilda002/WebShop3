@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-
-﻿using System;
+using System;
 using System.Collections.Generic;
-=======
->>>>>>> 47cc826759915c3c943f3b8b74d050d5d57a1eae
+
 using WebShop3;
 
 // creates the file for products
@@ -22,9 +19,9 @@ while (username?.Length == 0) // making sure input isn't empty
     username = Console.ReadLine()?.ToLower();
 }
 
-<<<<<<< HEAD
 
-=======
+
+
 string? password = string.Empty;
 while (password?.Length == 0) // making sure input isn't empty
 {
@@ -141,4 +138,4 @@ void UserMenu()
         }
     } while (!validChoice);
 }
->>>>>>> 47cc826759915c3c943f3b8b74d050d5d57a1eae
+
