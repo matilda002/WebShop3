@@ -49,7 +49,7 @@ public class EditUser
                 Console.WriteLine("Username successfully changed to " + _newUsername);
                 _validUsername = true;
             }
-            else if (_newUsername?.Length < 3)
+            else if (_newUsername?.Length < 2)
             {
                 Console.WriteLine("The username must include a min. 3 characters!\n\nPress ENTER to continue!");
                 Console.ReadKey();
