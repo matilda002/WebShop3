@@ -21,20 +21,20 @@ public class ProductMenu : Admin
             {
                 case 1:
                     CreateProduct();
-                    forward = true; break;
+                    break;
                 case 2:
                     ReadProduct();
-                    forward = true; break;
+                    break;
                 case 3:
                     UpdateProduct();
-                    forward = true; break;
+                    break;
                 case 4:
                     DeleteProduct();
-                    forward = true; break;
+                    break;
                 case 5:
                     Console.WriteLine("You have chosen to quit!\n\nPress 'ENTER' to continue!"); // quit program
                     Console.ReadKey();
-                    return;
+                    forward = true;  break;
                 default:
                     Console.WriteLine("Not a valid menuchoice!\n\nPress 'ENTER' to continue!");
                     Console.ReadKey();
