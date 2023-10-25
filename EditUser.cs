@@ -1,6 +1,9 @@
-﻿namespace WebShop3;
+﻿using System.Linq.Expressions;
+
+namespace WebShop3;
 
 
+// To put in Admin() later
 public class EditUser
 {
     private string? _username = string.Empty;
@@ -19,12 +22,13 @@ public class EditUser
             {
                 case (true):
                     OpenUser();
-                    valid = true; break;
+                    valid = true;
+                    break;
             }
         } while (!valid);
     }
     private void OpenUser()
-    {        
+    {
         // Loops until the new username includes 3 characters, and doesn't already exist in the Users folder
         string? _newUsername = string.Empty;
         bool _validUsername = false;
@@ -44,23 +48,20 @@ public class EditUser
             Console.Write("Enter a new username (min. 3 characters): ");
             _newUsername = Console.ReadLine()?.ToLower();
             // Program checking that the new username doesn't already exist
-            switch (File.Exists($"../../../Users/{_newUsername}.txt") && _newUsername?.Length > 2)
+            if (!File.Exists($"../../../Users/{_newUsername}.txt") && _newUsername?.Length > 2)
             {
-                case true:
-                    Console.WriteLine("Username successfully changed to " + _newUsername);
-                    _validUsername = true; break;
-                case false:
-                    switch (_newUsername?.Length < 3)
-                    {
-                        case false:
-                            Console.WriteLine("Username already exists!");
-                            break;
-                        case true:
-                            Console.WriteLine("The username must include a min. 3 characters!");
-                            break;
-                    }
-                    Console.ReadKey();
-                    break;   
+                Console.WriteLine("Username successfully changed to " + _newUsername);
+                _validUsername = true;
+            }
+            else if (_newUsername?.Length < 3)
+            {
+                Console.WriteLine("Username already exists!\n\nPress ENTER to continue!");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("The username must include a min. 3 characters!\n\nPress ENTER to continue!");
+                Console.ReadKey();
             }
         }
 
@@ -104,9 +105,9 @@ public class EditUser
         string _newUserFilepath = $"../../../Users/{_newUsername}.txt";
         string _oldUserFilepath = $"../../../Users/{_username}.txt"; // original file
         // Writing over the old login information with the new
-        File.WriteAllText(_newUserFilepath, $"{ _newUsername}\n{ _newPassword}\n{UserRole.User}");
+        File.WriteAllText(_newUserFilepath, $"{_newUsername}\n{_newPassword}\n{UserRole.User}");
         File.WriteAllText(_oldUserFilepath, $"{_newUsername}\n{_newPassword}\n{UserRole.User}");
         // Replacing the old file with the new one
-        File.Replace(_oldUserFilepath, _newUserFilepath, null); 
+        File.Replace(_oldUserFilepath, _newUserFilepath, null);
     }
 }
