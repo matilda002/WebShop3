@@ -141,7 +141,7 @@ namespace WebShop3
 
         private void AddAvailableProducts()
         {
-            string productFilePath = "../../../Products.txt";
+            string productFilePath = "../../../products.csv";
             string[] availableProductsRepresentedByStrings = File.ReadAllLines(productFilePath);
 
             foreach (string productRepresentedByString in availableProductsRepresentedByStrings)
