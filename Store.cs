@@ -189,6 +189,7 @@ namespace WebShop3
 
         private void DisplayCart()
         {
+            Console.Clear();
             int minimalCartSize = 0;
             if (_productsInCart.Count > minimalCartSize)
             {
