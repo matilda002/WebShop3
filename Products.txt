@@ -1,3 +1,0 @@
-﻿car, 2
-bike, 4
-wheel, 1
