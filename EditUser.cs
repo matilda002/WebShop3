@@ -63,11 +63,11 @@ public class EditUser
 
         // Program checking that the new password is at least 5 characters long
         string? _newPassword = string.Empty;
-        while (_newPassword?.Length <= 4) // 4 instead of 5 because index start at 0
+        while (_newPassword?.Length <= 7)
         {
             Console.Clear();
             Console.WriteLine("----- Edit User -----\n");
-            Console.Write("Enter the new password (min. 5 characters): ");
+            Console.Write("Enter the new password (min. 8 characters): ");
             _newPassword = Console.ReadLine();
         }
 
