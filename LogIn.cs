@@ -17,10 +17,14 @@ public class LogIn : ILoginSystem
             if (user.Role == UserRole.Admin) // checks to see if it's an admin that logged in
             {
                 Console.WriteLine(user.Role + " logged in, welcome, " + username);
+                Console.WriteLine("\n\nPress 'ENTER' to continue!");
+                Console.ReadKey();
             }
             else if (user.Role == UserRole.User) // checks to see if its a user that logged in
             {
                 Console.WriteLine("Welcome, " + username + ", you are now logged in");
+                Console.WriteLine("\n\nPress 'ENTER' to continue!");
+                Console.ReadKey();
             }
             return true;
         }
@@ -46,6 +50,8 @@ public class LogIn : ILoginSystem
         {
             // logging in if username already exists
             Console.WriteLine("Logging in...");
+            Console.WriteLine("\n\nPress 'ENTER' to continue!");
+            Console.ReadKey();
             return true;
         }
 
@@ -57,6 +63,8 @@ public class LogIn : ILoginSystem
         {
             SaveUsers(newUser); //saves the user
             Console.WriteLine("Registration successful");
+            Console.WriteLine("\n\nPress 'ENTER' to continue!");
+            Console.ReadKey();
         }
 
         return false;

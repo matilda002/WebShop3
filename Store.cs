@@ -189,6 +189,7 @@ namespace WebShop3
 
         private void DisplayCart()
         {
+            Console.Clear();
             int minimalCartSize = 0;
             if (_productsInCart.Count > minimalCartSize)
             {
@@ -206,16 +207,19 @@ namespace WebShop3
 
         private void DisplayProductData(List<Product> productsToShow)
         {
+            Console.Clear();
             for (int index = 0; index < productsToShow.Count; index++)
             {
                 Product product = productsToShow[index];
-                string productInformation = $"{index} : {product.Name}";
+                string productInformation = $"{index} : {product.Name}, {product.Price}kr";
                 Console.WriteLine(productInformation);
             }
         }
 
         private void DisplayStoreMenu()
         {
+            Console.Clear();
+            Console.WriteLine("----- Store -----");
             string storeMenuText = "\nChoose an option:\n" +
                                                    NumericalDialogueAnswer.Zero +
                                                    ") Display cart\n" +

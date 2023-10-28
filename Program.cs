@@ -1,34 +1,65 @@
-using System;
-using System.Collections.Generic;
-
 using WebShop3;
 
 // creates the file for products
-if (!File.Exists("../../../products.csv")) // ändra till "../../../products.csv"
+if (!File.Exists("../../../products.csv"))
 {
     File.Create("../../../products.csv").Close();
 }
 
 ILoginSystem loginSystem = new LogIn();
-
 string? username = string.Empty;
-while (username?.Length == 0) // making sure input isn't empty
-{
-    Console.Clear();
-    Console.WriteLine("Enter username: ");
-    username = Console.ReadLine()?.ToLower();
-}
-
 string? password = string.Empty;
-while (password?.Length == 0) // making sure input isn't empty
+
+bool endProgram = false;
+do
 {
     Console.Clear();
-    Console.WriteLine("Enter password: ");
-    password = Console.ReadLine();
+    Console.WriteLine("----- Welcome to the shop -----\n" +
+                      "1. Register new user\n" +
+                      "2. Login\n\n" +
+                      "3. End Program\n");
+    Console.Write("Write your menuchoice:  ");
+    int.TryParse(Console.ReadLine(), out int answer);
+
+    switch (answer)
+    {
+        case 1:
+            EnterLogin();
+            loginSystem.Register(username, password, UserRole.User);
+            AdminUserMenu();
+            break;
+        case 2:
+            EnterLogin();
+            loginSystem.Login(username, password);
+            AdminUserMenu();
+            break;
+        case 3:
+            Console.WriteLine("Ending program!");
+            Console.ReadKey();
+            endProgram = true; break;
+    }
+
+} while (!endProgram);
+
+void EnterLogin()
+{
+    while (username?.Length == 0)
+    {
+        Console.Clear();
+        Console.WriteLine("Enter username: ");
+        username = Console.ReadLine()?.ToLower();
+    }
+
+    while (password?.Length == 0)
+    {
+        Console.Clear();
+        Console.WriteLine("Enter password: ");
+        password = Console.ReadLine();
+    }
+    return;
 }
 
-
-if (loginSystem.Login(username, password))
+void AdminUserMenu()
 {
     UserRole userRole = GetRole(username); // reads the role from the method
 
@@ -41,6 +72,7 @@ if (loginSystem.Login(username, password))
         UserMenu();
     }
 }
+
 
 static UserRole GetRole(string username)
 {
@@ -109,7 +141,7 @@ void UserMenu()
         Console.Clear();
         Console.WriteLine("------- Costumer Menu -------\n" +
                           "1. Store\n" +
-                          "2. See your orderhistory" +
+                          "2. See your orderhistory\n" +
                           "\n3. Quit");
         Console.Write("\nWrite your menuchoice:  ");
         int.TryParse(Console.ReadLine(), out int successful); // make sure the input is a number and included in the list
