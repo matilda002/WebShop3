@@ -2,7 +2,7 @@
 
 namespace WebShop3;
 
-public class ProductMenu : Admin
+public class ProductMenu : EditProduct
 {
     public void StockMenu()
     {
